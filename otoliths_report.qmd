@@ -507,6 +507,8 @@ df_age %>%
   )
 ```
 
+The seasonal pattern in @fig-sex-ratio-length-age-goa and @fig-sex-ratio-length-age-bsai is broadly similar between GOA and BSAI. In both areas, the age-4 panels suggest that fish sampled in the A season tend to be slightly larger than those sampled in the B season, which is somewhat counterintuitive.
+
 ```{r}
 #| label: fig-sex-ratio-length-age-subarea-season
 #| fig-cap: "Sex ratio (proportion female) by length for subareas SE_BS and WGOA, faceted by age (AGE < 11), with subarea shown by color and separate plots for A and B seasons."
