@@ -324,7 +324,7 @@ plot_mean_length_age_sex <- function(data, age_range = 2:10, facet_ncol = 6,
 
 ## Figures
 
-The all-years pooled comparisons are shown separately for GOA in @fig-sex-ratio-overall-goa and for BSAI in @fig-sex-ratio-overall-bsai. The length-based trend by year for GOA is shown in @fig-sex-ratio-length-year-goa, the corresponding BSAI view is shown in @fig-sex-ratio-length-year-bsai, the age-based view by year is in @fig-sex-ratio-age-year, a younger-age-focused view is in @fig-sex-ratio-length-age, mean length-at-age by sex (ages 2-10) is shown in @fig-mean-length-age-sex, and corresponding views split by fishery management program are shown in @fig-mean-length-age-sex-fmp and @fig-mean-length-age-sex-season-fmp.
+The all-years pooled comparisons are shown separately for GOA in @fig-sex-ratio-overall-goa and for BSAI in @fig-sex-ratio-overall-bsai. The length-based trend by year for GOA is shown in @fig-sex-ratio-length-year-goa, the corresponding BSAI view is shown in @fig-sex-ratio-length-year-bsai, age-based views by year are shown separately for GOA in @fig-sex-ratio-age-year-goa and for BSAI in @fig-sex-ratio-age-year-bsai, younger-age-focused views are shown separately for GOA in @fig-sex-ratio-length-age-goa and for BSAI in @fig-sex-ratio-length-age-bsai, mean length-at-age by sex (ages 2-10) is shown in @fig-mean-length-age-sex, and corresponding views split by fishery management program are shown in @fig-mean-length-age-sex-fmp and @fig-mean-length-age-sex-season-fmp.
 
 ```{r}
 #| label: fig-sex-ratio-overall-goa
@@ -393,25 +393,71 @@ df_age %>%
 ```
 
 ```{r}
-#| label: fig-sex-ratio-age-year
-#| fig-cap: "Sex ratio (proportion female) by age, faceted by year (YEAR > 2000)."
+#| label: fig-sex-ratio-age-year-goa
+#| fig-cap: "Sex ratio (proportion female) by age for GOA, faceted by year (YEAR > 2000)."
 #| fig-width: 12
 #| fig-height: 14
 
 df_age %>%
   filter(YEAR > 2000) %>%
-  plot_sex_ratio(x_var = AGE, facet_var = YEAR, show_labels = FALSE, facet_ncol = 5)
+  plot_sex_ratio(
+    x_var = AGE,
+    facet_var = YEAR,
+    show_labels = FALSE,
+    facet_ncol = 5,
+    fmp_filter = "GOA"
+  )
 ```
 
 ```{r}
-#| label: fig-sex-ratio-length-age
-#| fig-cap: "Sex ratio (proportion female) by length, faceted by age (AGE < 11)."
+#| label: fig-sex-ratio-age-year-bsai
+#| fig-cap: "Sex ratio (proportion female) by age for BSAI, faceted by year (YEAR > 2000)."
+#| fig-width: 12
+#| fig-height: 14
+
+df_age %>%
+  filter(YEAR > 2000) %>%
+  plot_sex_ratio(
+    x_var = AGE,
+    facet_var = YEAR,
+    show_labels = FALSE,
+    facet_ncol = 5,
+    fmp_filter = "BSAI"
+  )
+```
+
+```{r}
+#| label: fig-sex-ratio-length-age-goa
+#| fig-cap: "Sex ratio (proportion female) by length for GOA, faceted by age (AGE < 11)."
 #| fig-width: 11
 #| fig-height: 8
 
 df_age %>%
   filter(AGE < 11) %>%
-  plot_sex_ratio(x_var = LENGTH, facet_var = AGE, show_labels = FALSE, facet_ncol = 4)
+  plot_sex_ratio(
+    x_var = LENGTH,
+    facet_var = AGE,
+    show_labels = FALSE,
+    facet_ncol = 4,
+    fmp_filter = "GOA"
+  )
+```
+
+```{r}
+#| label: fig-sex-ratio-length-age-bsai
+#| fig-cap: "Sex ratio (proportion female) by length for BSAI, faceted by age (AGE < 11)."
+#| fig-width: 11
+#| fig-height: 8
+
+df_age %>%
+  filter(AGE < 11) %>%
+  plot_sex_ratio(
+    x_var = LENGTH,
+    facet_var = AGE,
+    show_labels = FALSE,
+    facet_ncol = 4,
+    fmp_filter = "BSAI"
+  )
 ```
 
 ```{r}

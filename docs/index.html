@@ -416,7 +416,7 @@ Figure&nbsp;1: Estimated EBS pollock catch numbers by sex for the A season (Janu
 </section>
 <section id="figures" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="figures"><span class="header-section-number">3</span> Figures</h2>
-<p>The all-years pooled comparisons are shown separately for GOA in <a href="#fig-sex-ratio-overall-goa" class="quarto-xref">Figure&nbsp;2</a> and for BSAI in <a href="#fig-sex-ratio-overall-bsai" class="quarto-xref">Figure&nbsp;3</a>. The length-based trend by year for GOA is shown in <a href="#fig-sex-ratio-length-year-goa" class="quarto-xref">Figure&nbsp;4</a>, the corresponding BSAI view is shown in <a href="#fig-sex-ratio-length-year-bsai" class="quarto-xref">Figure&nbsp;5</a>, the age-based view by year is in <a href="#fig-sex-ratio-age-year" class="quarto-xref">Figure&nbsp;6</a>, a younger-age-focused view is in <a href="#fig-sex-ratio-length-age" class="quarto-xref">Figure&nbsp;7</a>, mean length-at-age by sex (ages 2-10) is shown in <a href="#fig-mean-length-age-sex" class="quarto-xref">Figure&nbsp;8</a>, and corresponding views split by fishery management program are shown in <a href="#fig-mean-length-age-sex-fmp" class="quarto-xref">Figure&nbsp;9</a> and <a href="#fig-mean-length-age-sex-season-fmp" class="quarto-xref">Figure&nbsp;10</a>.</p>
+<p>The all-years pooled comparisons are shown separately for GOA in <a href="#fig-sex-ratio-overall-goa" class="quarto-xref">Figure&nbsp;2</a> and for BSAI in <a href="#fig-sex-ratio-overall-bsai" class="quarto-xref">Figure&nbsp;3</a>. The length-based trend by year for GOA is shown in <a href="#fig-sex-ratio-length-year-goa" class="quarto-xref">Figure&nbsp;4</a>, the corresponding BSAI view is shown in <a href="#fig-sex-ratio-length-year-bsai" class="quarto-xref">Figure&nbsp;5</a>, age-based views by year are shown separately for GOA in <a href="#fig-sex-ratio-age-year-goa" class="quarto-xref">Figure&nbsp;6</a> and for BSAI in <a href="#fig-sex-ratio-age-year-bsai" class="quarto-xref">Figure&nbsp;7</a>, younger-age-focused views are shown separately for GOA in <a href="#fig-sex-ratio-length-age-goa" class="quarto-xref">Figure&nbsp;8</a> and for BSAI in <a href="#fig-sex-ratio-length-age-bsai" class="quarto-xref">Figure&nbsp;9</a>, mean length-at-age by sex (ages 2-10) is shown in <a href="#fig-mean-length-age-sex" class="quarto-xref">Figure&nbsp;10</a>, and corresponding views split by fishery management program are shown in <a href="#fig-mean-length-age-sex-fmp" class="quarto-xref">Figure&nbsp;11</a> and <a href="#fig-mean-length-age-sex-season-fmp" class="quarto-xref">Figure&nbsp;12</a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -524,16 +524,22 @@ Figure&nbsp;5: Sex ratio (proportion female) by length for BSAI, faceted by year
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_age <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(<span class="at">x_var =</span> AGE, <span class="at">facet_var =</span> YEAR, <span class="at">show_labels =</span> <span class="cn">FALSE</span>, <span class="at">facet_ncol =</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> AGE,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> YEAR,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">5</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"GOA"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-sex-ratio-age-year" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-sex-ratio-age-year-goa" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-sex-ratio-age-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-sex-ratio-age-year-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Sex ratio (proportion female) by age, faceted by year (YEAR > 2000)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-age-year-1.png" class="img-fluid figure-img" width="1152"></a>
+<div aria-describedby="fig-sex-ratio-age-year-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-age-year-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Figure&nbsp;6: Sex ratio (proportion female) by age for GOA, faceted by year (YEAR > 2000)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-age-year-goa-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-age-year-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Sex ratio (proportion female) by age, faceted by year (YEAR &gt; 2000).
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-age-year-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Sex ratio (proportion female) by age for GOA, faceted by year (YEAR &gt; 2000).
 </figcaption>
 </figure>
 </div>
@@ -543,17 +549,23 @@ Figure&nbsp;6: Sex ratio (proportion female) by age, faceted by year (YEAR &gt; 
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df_age <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AGE <span class="sc">&lt;</span> <span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(<span class="at">x_var =</span> LENGTH, <span class="at">facet_var =</span> AGE, <span class="at">show_labels =</span> <span class="cn">FALSE</span>, <span class="at">facet_ncol =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> AGE,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> YEAR,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">5</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"BSAI"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-sex-ratio-length-age" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-sex-ratio-age-year-bsai" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-sex-ratio-length-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-sex-ratio-length-age-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: Sex ratio (proportion female) by length, faceted by age (AGE < 11)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-length-age-1.png" class="img-fluid figure-img" width="1056"></a>
+<div aria-describedby="fig-sex-ratio-age-year-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-age-year-bsai-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Figure&nbsp;7: Sex ratio (proportion female) by age for BSAI, faceted by year (YEAR > 2000)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-age-year-bsai-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-length-age-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: Sex ratio (proportion female) by length, faceted by age (AGE &lt; 11).
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-age-year-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Sex ratio (proportion female) by age for BSAI, faceted by year (YEAR &gt; 2000).
 </figcaption>
 </figure>
 </div>
@@ -562,20 +574,24 @@ Figure&nbsp;7: Sex ratio (proportion female) by length, faceted by age (AGE &lt;
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_mean_length_age_sex</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  df_age,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">color_var =</span> <span class="st">"sex"</span>,</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">shape_var =</span> <span class="st">"fmp"</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_age <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AGE <span class="sc">&lt;</span> <span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> LENGTH,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> AGE,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">4</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"GOA"</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-mean-length-age-sex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-sex-ratio-length-age-goa" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mean-length-age-sex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-mean-length-age-sex-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: Mean length by age (2-10) using records with non-missing ages, with sex shown by color and fishery management program shown by symbol."><img src="otoliths_report_files/figure-html/fig-mean-length-age-sex-1.png" class="img-fluid figure-img" width="960"></a>
+<div aria-describedby="fig-sex-ratio-length-age-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-length-age-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;8: Sex ratio (proportion female) by length for GOA, faceted by age (AGE < 11)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-length-age-goa-1.png" class="img-fluid figure-img" width="1056"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mean-length-age-sex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: Mean length by age (2-10) using records with non-missing ages, with sex shown by color and fishery management program shown by symbol.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-length-age-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Sex ratio (proportion female) by length for GOA, faceted by age (AGE &lt; 11).
 </figcaption>
 </figure>
 </div>
@@ -584,16 +600,24 @@ Figure&nbsp;8: Mean length by age (2-10) using records with non-missing ages, wi
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_mean_length_age_sex</span>(df_age, <span class="at">facet_fmp =</span> <span class="cn">TRUE</span>, <span class="at">facet_ncol =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df_age <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AGE <span class="sc">&lt;</span> <span class="dv">11</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> LENGTH,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> AGE,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">4</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"BSAI"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div id="fig-mean-length-age-sex-fmp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-sex-ratio-length-age-bsai" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-mean-length-age-sex-fmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-mean-length-age-sex-fmp-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;9: Mean length by age (2-10) and sex using records with non-missing ages, faceted by fishery management program."><img src="otoliths_report_files/figure-html/fig-mean-length-age-sex-fmp-1.png" class="img-fluid figure-img" width="1056"></a>
+<div aria-describedby="fig-sex-ratio-length-age-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-length-age-bsai-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Figure&nbsp;9: Sex ratio (proportion female) by length for BSAI, faceted by age (AGE < 11)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-length-age-bsai-1.png" class="img-fluid figure-img" width="1056"></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mean-length-age-sex-fmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9: Mean length by age (2-10) and sex using records with non-missing ages, faceted by fishery management program.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-length-age-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Sex ratio (proportion female) by length for BSAI, faceted by age (AGE &lt; 11).
 </figcaption>
 </figure>
 </div>
@@ -604,20 +628,60 @@ Figure&nbsp;9: Mean length by age (2-10) and sex using records with non-missing 
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_mean_length_age_sex</span>(</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  df_age,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet_rows =</span> <span class="st">"sex"</span>,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet_cols =</span> <span class="st">"fmp"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">color_var =</span> <span class="st">"season"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet_ncol =</span> <span class="dv">1</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">color_var =</span> <span class="st">"sex"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">shape_var =</span> <span class="st">"fmp"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-mean-length-age-sex" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mean-length-age-sex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-mean-length-age-sex-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;10: Mean length by age (2-10) using records with non-missing ages, with sex shown by color and fishery management program shown by symbol."><img src="otoliths_report_files/figure-html/fig-mean-length-age-sex-1.png" class="img-fluid figure-img" width="960"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mean-length-age-sex-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Mean length by age (2-10) using records with non-missing ages, with sex shown by color and fishery management program shown by symbol.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_mean_length_age_sex</span>(df_age, <span class="at">facet_fmp =</span> <span class="cn">TRUE</span>, <span class="at">facet_ncol =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-mean-length-age-sex-fmp" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mean-length-age-sex-fmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-mean-length-age-sex-fmp-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;11: Mean length by age (2-10) and sex using records with non-missing ages, faceted by fishery management program."><img src="otoliths_report_files/figure-html/fig-mean-length-age-sex-fmp-1.png" class="img-fluid figure-img" width="1056"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mean-length-age-sex-fmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Mean length by age (2-10) and sex using records with non-missing ages, faceted by fishery management program.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_mean_length_age_sex</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  df_age,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet_rows =</span> <span class="st">"sex"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet_cols =</span> <span class="st">"fmp"</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">color_var =</span> <span class="st">"season"</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">facet_ncol =</span> <span class="dv">1</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-mean-length-age-sex-season-fmp" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mean-length-age-sex-season-fmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-mean-length-age-sex-season-fmp-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Figure&nbsp;10: Mean length by age (2-10) using records with non-missing ages, faceted by sex with fishery management program shown in columns and season shown by color."><img src="otoliths_report_files/figure-html/fig-mean-length-age-sex-season-fmp-1.png" class="img-fluid figure-img" width="1152"></a>
+<a href="otoliths_report_files/figure-html/fig-mean-length-age-sex-season-fmp-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="Figure&nbsp;12: Mean length by age (2-10) using records with non-missing ages, faceted by sex with fishery management program shown in columns and season shown by color."><img src="otoliths_report_files/figure-html/fig-mean-length-age-sex-season-fmp-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mean-length-age-sex-season-fmp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;10: Mean length by age (2-10) using records with non-missing ages, faceted by sex with fishery management program shown in columns and season shown by color.
+Figure&nbsp;12: Mean length by age (2-10) using records with non-missing ages, faceted by sex with fishery management program shown in columns and season shown by color.
 </figcaption>
 </figure>
 </div>
