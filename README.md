@@ -2,6 +2,8 @@
 
 Static Quarto publication of the BSAI pollock otolith report.
 
+Published site: <https://jimianelli.github.io/fishery_ages/>
+
 ## Local render
 
 The GitHub Pages site serves the rendered files committed under `docs/`.
