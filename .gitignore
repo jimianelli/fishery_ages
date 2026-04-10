@@ -1,0 +1,12 @@
+/.DS_Store
+/.Rhistory
+/.RData
+/.Rproj.user/
+/.quarto/
+/.vscode/
+/age1986-2025.csv
+/otoliths_report.html
+/otoliths_report_files/
+/otoliths_report_cache/
+
+**/*.quarto_ipynb

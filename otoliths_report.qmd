@@ -1,0 +1,459 @@
+---
+title: "BSAI Pollock Otolith Figures"
+author: "Jim Ianelli"
+date: today
+output-file: index.html
+format:
+  html:
+    toc: true
+    number-sections: true
+    lightbox: true
+    code-fold: true
+    code-summary: "Show code"
+execute:
+  warning: false
+  message: false
+  echo: true
+---
+
+## Overview
+
+In this report we examine the pollock fishery age data for the Gulf of Alaska (GOA) and Bering Sea and Aleutian Islands (BSAI). 
+These data are parsed based on R scripts presented below  covering data from e1986-2025. 
+@fig-catch-sex-season provides context for sex-specific differences in fishery catch prior to the age and length analyses 
+based on appriately raised estimates of catch-at-age by sex and season (Ianelli et al. 2024).
+The figure indicates slight variability in  sex-specific structure in catch across years but without a strong
+indication that the sex-ratio deviates consistently from year to year.
+These patterns motivate explicit sex-specific summaries in the subsequent age- and length-based diagnostics.
+
+![Estimated EBS pollock catch numbers by sex for the A season (January-May), B season (June-October), and total. Source: Ianelli et al. (2024).](images/ebs_pollock_catch_sex_season_ianelli_2024.png){#fig-catch-sex-season fig-alt="Time series of EBS pollock catch by female and male fish across A season, B season, and total catch."}
+
+
+## Setup
+
+```{r}
+#| label: setup
+#| include: false
+#library(dplyr)
+library(tidyverse)
+library(patchwork)
+library(readr)
+library(scales)
+```
+
+```{r}
+#| label: load-df-age
+#| include: false
+#| cache: true
+#| cache.extra: !expr file.info("age1986-2025.csv")$mtime
+
+df_age_big <- read_csv("age1986-2025.csv", show_col_types = FALSE)
+df_age <- df_age_big |> mutate(
+  season=ifelse(month(HAUL_OFFLOAD_DATE)<6,"A", "B"),
+  fmp=ifelse(NMFS_AREA<600,"BSAI","GOA")) |> select(YEAR,season,fmp, SEX, AGE, LENGTH)
+```
+
+```{r}
+#| label: plot-function
+filter_plot_data <- function(data, season_filter = NULL, fmp_filter = NULL) {
+  data <- data %>%
+    filter(SEX %in% c("F", "M"))
+
+  if (!is.null(season_filter)) {
+    data <- data %>%
+      filter(season %in% season_filter)
+  }
+
+  if (!is.null(fmp_filter)) {
+    data <- data %>%
+      filter(fmp %in% fmp_filter)
+  }
+
+  data
+}
+
+build_facet_vars <- function(primary_facet = NULL, facet_season = FALSE, facet_fmp = FALSE) {
+  facet_vars <- list()
+
+  if (!is.null(primary_facet) && !rlang::quo_is_null(primary_facet)) {
+    facet_vars <- c(facet_vars, list(primary_facet))
+  }
+
+  if (facet_season) {
+    facet_vars <- c(facet_vars, rlang::quos(season))
+  }
+
+  if (facet_fmp) {
+    facet_vars <- c(facet_vars, rlang::quos(fmp))
+  }
+
+  facet_vars
+}
+
+plot_sex_ratio <- function(data, x_var, facet_var = NULL, min_n = 5,
+                           y_limits = c(0.3, 0.7), show_labels = FALSE,
+                           facet_ncol = 6, season_filter = NULL,
+                           fmp_filter = NULL, facet_season = FALSE,
+                           facet_fmp = FALSE) {
+  x_var <- rlang::enquo(x_var)
+  facet_var <- rlang::enquo(facet_var)
+  facet_vars <- build_facet_vars(facet_var, facet_season = facet_season, facet_fmp = facet_fmp)
+  group_vars <- c(facet_vars, list(x_var))
+
+  plot_df <- data %>%
+    filter_plot_data(season_filter = season_filter, fmp_filter = fmp_filter) %>%
+    mutate(is_female = if_else(SEX == "F", 1, 0)) %>%
+    group_by(!!!group_vars) %>%
+    summarize(
+      total_n = n(),
+      sex_ratio = mean(is_female),
+      .groups = "drop"
+    ) %>%
+    filter(total_n >= min_n)
+
+  p <- ggplot(plot_df, aes(x = !!x_var, y = sex_ratio))
+
+  if (show_labels) {
+    p <- p +
+      geom_text(
+        aes(label = round(total_n / 100, 1)),
+        size = 2.8,
+        alpha = 0.8,
+        check_overlap = TRUE
+      )
+  } else {
+    p <- p +
+      geom_point(aes(size = total_n), alpha = 0.4)
+  }
+
+  p <- p +
+    geom_smooth(method = "loess", formula = "y ~ x", color = "darkred") +
+    geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray50") +
+    scale_y_continuous(labels = scales::percent, limits = y_limits) +
+    labs(
+      title = paste("Sex Ratio (Proportion Female) by", rlang::as_label(x_var)),
+      subtitle = if (show_labels) "Labels show Sample Size / 100" else "Points sized by sample size",
+      x = rlang::as_label(x_var),
+      y = "Sex Ratio",
+      size = "Sample Size"
+    ) +
+    theme_minimal(base_size = 11)
+
+  if (length(facet_vars) > 0) {
+    p <- p + facet_wrap(vars(!!!facet_vars), ncol = facet_ncol)
+  }
+
+  p
+}
+
+plot_sex_ratio_age_box <- function(data, min_n = 25, y_limits = c(0.3, 0.7),
+                                   facet_ncol = 6, season_filter = NULL,
+                                   fmp_filter = NULL, facet_season = FALSE,
+                                   facet_fmp = FALSE) {
+  facet_vars <- build_facet_vars(facet_season = facet_season, facet_fmp = facet_fmp)
+  group_vars <- c(facet_vars, rlang::quos(YEAR, age_group))
+
+  plot_df <- data %>%
+    filter_plot_data(season_filter = season_filter, fmp_filter = fmp_filter) %>%
+    mutate(
+      is_female = if_else(SEX == "F", 1, 0),
+      age_group = if_else(AGE > 13, "13+", as.character(AGE))
+    ) %>%
+    group_by(!!!group_vars) %>%
+    summarize(
+      total_n = n(),
+      sex_ratio = mean(is_female),
+      .groups = "drop"
+    ) %>%
+    filter(total_n >= min_n)
+
+  numeric_ages <- suppressWarnings(as.integer(plot_df$age_group[plot_df$age_group != "13+"]))
+  age_levels <- c(
+    as.character(sort(unique(numeric_ages[!is.na(numeric_ages)]))),
+    if (any(plot_df$age_group == "13+")) "13+" else character(0)
+  )
+  plot_df <- plot_df %>%
+    mutate(age_group = factor(age_group, levels = age_levels))
+
+  p <- ggplot(plot_df, aes(x = age_group, y = sex_ratio)) +
+    geom_violin(fill = "gray85", color = "gray35", alpha = 0.9, trim = FALSE) +
+    stat_summary(fun = median, geom = "point", size = 1.6, color = "black") +
+    geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray50") +
+    scale_y_continuous(labels = scales::percent, limits = y_limits) +
+    labs(
+      x = "Age (13+ pooled)",
+      y = "Sex Ratio"
+    ) +
+    theme_minimal(base_size = 11)
+
+  if (length(facet_vars) > 0) {
+    p <- p + facet_wrap(vars(!!!facet_vars), ncol = facet_ncol)
+  }
+
+  p
+}
+
+plot_sex_ratio_length_box <- function(data, bin_width = 5, min_n = 50,
+                                      y_limits = c(0.3, 0.7), facet_ncol = 6,
+                                      season_filter = NULL, fmp_filter = NULL,
+                                      facet_season = FALSE, facet_fmp = FALSE) {
+  facet_vars <- build_facet_vars(facet_season = facet_season, facet_fmp = facet_fmp)
+  group_vars <- c(facet_vars, rlang::quos(YEAR, length_bin_lower))
+
+  plot_df <- data %>%
+    filter_plot_data(season_filter = season_filter, fmp_filter = fmp_filter) %>%
+    filter(LENGTH >= 20, LENGTH <= 65) %>%
+    mutate(
+      is_female = if_else(SEX == "F", 1, 0),
+      length_bin_lower = pmin(floor((LENGTH - 20) / bin_width) * bin_width + 20, 60)
+    ) %>%
+    group_by(!!!group_vars) %>%
+    summarize(
+      total_n = n(),
+      sex_ratio = mean(is_female),
+      .groups = "drop"
+    ) %>%
+    filter(total_n >= min_n) %>%
+    mutate(
+      length_bin = if_else(
+        length_bin_lower == 60,
+        "60-65",
+        paste0(length_bin_lower, "-", length_bin_lower + (bin_width - 1))
+      ),
+      length_bin = factor(length_bin, levels = unique(length_bin[order(length_bin_lower)]))
+    )
+
+  p <- ggplot(plot_df, aes(x = length_bin, y = sex_ratio)) +
+    geom_violin(fill = "gray85", color = "gray35", alpha = 0.9, trim = FALSE) +
+    stat_summary(fun = median, geom = "point", size = 1.6, color = "black") +
+    geom_hline(yintercept = 0.5, linetype = "dashed", color = "gray50") +
+    scale_y_continuous(labels = scales::percent, limits = y_limits) +
+    labs(
+      x = "Length Bin (cm, 20-65)",
+      y = "Sex Ratio"
+    ) +
+    theme_minimal(base_size = 11) +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+  if (length(facet_vars) > 0) {
+    p <- p + facet_wrap(vars(!!!facet_vars), ncol = facet_ncol)
+  }
+
+  p
+}
+
+plot_mean_length_age_sex <- function(data, age_range = 2:10, facet_ncol = 6,
+                                     season_filter = NULL, fmp_filter = NULL,
+                                     facet_season = FALSE, facet_fmp = FALSE,
+                                     facet_sex = FALSE, color_var = "sex",
+                                     shape_var = NULL, facet_rows = NULL,
+                                     facet_cols = NULL) {
+  facet_names <- c(
+    if (facet_season) "season",
+    if (facet_fmp) "fmp",
+    if (facet_sex) "sex"
+  )
+  facet_grid_names <- c(facet_rows, facet_cols)
+  group_names <- unique(c(facet_names, facet_grid_names, "age_num", "sex", color_var, shape_var))
+
+  plot_df <- data %>%
+    filter_plot_data(season_filter = season_filter, fmp_filter = fmp_filter) %>%
+    filter(!is.na(AGE), !is.na(LENGTH)) %>%
+    mutate(
+      age_num = as.numeric(AGE),
+      sex = recode(SEX, F = "Female", M = "Male")
+    ) %>%
+    filter(age_num >= min(age_range), age_num <= max(age_range)) %>%
+    group_by(across(all_of(group_names))) %>%
+    summarize(
+      mean_length = mean(LENGTH, na.rm = TRUE),
+      .groups = "drop"
+    )
+
+  plot_mapping <- aes(x = age_num, y = mean_length)
+  plot_mapping$colour <- rlang::sym(color_var)
+
+  if (!is.null(shape_var)) {
+    plot_mapping$shape <- rlang::sym(shape_var)
+  }
+
+  line_group_names <- unique(c(color_var, shape_var, if (!facet_sex) "sex"))
+  plot_mapping$group <- rlang::expr(interaction(!!!rlang::syms(line_group_names), drop = TRUE))
+  color_label <- dplyr::case_match(
+    color_var,
+    "sex" ~ "Sex",
+    "season" ~ "Season",
+    "fmp" ~ "FMP",
+    .default = color_var
+  )
+  shape_label <- if (is.null(shape_var)) {
+    NULL
+  } else {
+    dplyr::case_match(
+      shape_var,
+      "sex" ~ "Sex",
+      "season" ~ "Season",
+      "fmp" ~ "FMP",
+      .default = shape_var
+    )
+  }
+
+  p <- ggplot(plot_df, plot_mapping) +
+    geom_point(size = 2.4, alpha = 0.9) +
+    geom_smooth(method = "loess", formula = "y ~ x", se = FALSE, linewidth = 1.1) +
+    scale_x_continuous(breaks = age_range) +
+    labs(
+      x = "Age",
+      y = "Mean Length",
+      color = color_label,
+      shape = shape_label
+    ) +
+    theme_minimal(base_size = 11)
+
+  if (!is.null(facet_rows) || !is.null(facet_cols)) {
+    row_vars <- if (is.null(facet_rows)) list(.) else rlang::syms(facet_rows)
+    col_vars <- if (is.null(facet_cols)) list(.) else rlang::syms(facet_cols)
+    p <- p + facet_grid(rows = vars(!!!row_vars), cols = vars(!!!col_vars))
+  } else if (length(facet_names) > 0) {
+    p <- p + facet_wrap(vars(!!!rlang::syms(facet_names)), ncol = facet_ncol)
+  }
+
+  p
+}
+```
+
+## Figures
+
+The all-years pooled comparisons are shown separately for GOA in @fig-sex-ratio-overall-goa and for BSAI in @fig-sex-ratio-overall-bsai. The length-based trend by year for GOA is shown in @fig-sex-ratio-length-year-goa, the corresponding BSAI view is shown in @fig-sex-ratio-length-year-bsai, the age-based view by year is in @fig-sex-ratio-age-year, a younger-age-focused view is in @fig-sex-ratio-length-age, mean length-at-age by sex (ages 2-10) is shown in @fig-mean-length-age-sex, and corresponding views split by fishery management program are shown in @fig-mean-length-age-sex-fmp and @fig-mean-length-age-sex-season-fmp.
+
+```{r}
+#| label: fig-sex-ratio-overall-goa
+#| fig-cap: "GOA distribution across year-specific sex ratios: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."
+#| fig-width: 10
+#| fig-height: 12
+
+p_age_overall <- plot_sex_ratio_age_box(df_age, min_n = 25, fmp_filter = "GOA") +
+  labs(title = "GOA: By Age (Across Years)")
+
+p_length_overall <- plot_sex_ratio_length_box(df_age, bin_width = 5, min_n = 50, fmp_filter = "GOA") +
+  labs(title = "GOA: By Length (Across Years)")
+
+p_age_overall / p_length_overall + patchwork::plot_layout(heights = c(1, 1))
+```
+
+```{r}
+#| label: fig-sex-ratio-overall-bsai
+#| fig-cap: "BSAI distribution across year-specific sex ratios: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."
+#| fig-width: 10
+#| fig-height: 12
+
+p_age_overall <- plot_sex_ratio_age_box(df_age, min_n = 25, fmp_filter = "BSAI") +
+  labs(title = "BSAI: By Age (Across Years)")
+
+p_length_overall <- plot_sex_ratio_length_box(df_age, bin_width = 5, min_n = 50, fmp_filter = "BSAI") +
+  labs(title = "BSAI: By Length (Across Years)")
+
+p_age_overall / p_length_overall + patchwork::plot_layout(heights = c(1, 1))
+```
+
+```{r}
+#| label: fig-sex-ratio-length-year-goa
+#| fig-cap: "Sex ratio (proportion female) by length for GOA, faceted by year (YEAR > 2000; min_n = 100)."
+#| fig-width: 12
+#| fig-height: 14
+
+df_age %>%
+  filter(YEAR > 2000) %>%
+  plot_sex_ratio(
+    x_var = LENGTH,
+    facet_var = YEAR,
+    min_n = 100,
+    show_labels = FALSE,
+    facet_ncol = 5,
+    fmp_filter = "GOA"
+  )
+```
+
+```{r}
+#| label: fig-sex-ratio-length-year-bsai
+#| fig-cap: "Sex ratio (proportion female) by length for BSAI, faceted by year (YEAR > 2000; min_n = 500)."
+#| fig-width: 12
+#| fig-height: 14
+
+df_age %>%
+  filter(YEAR > 2000) %>%
+  plot_sex_ratio(
+    x_var = LENGTH,
+    facet_var = YEAR,
+    min_n = 500,
+    show_labels = FALSE,
+    facet_ncol = 5,
+    fmp_filter = "BSAI"
+  )
+```
+
+```{r}
+#| label: fig-sex-ratio-age-year
+#| fig-cap: "Sex ratio (proportion female) by age, faceted by year (YEAR > 2000)."
+#| fig-width: 12
+#| fig-height: 14
+
+df_age %>%
+  filter(YEAR > 2000) %>%
+  plot_sex_ratio(x_var = AGE, facet_var = YEAR, show_labels = FALSE, facet_ncol = 5)
+```
+
+```{r}
+#| label: fig-sex-ratio-length-age
+#| fig-cap: "Sex ratio (proportion female) by length, faceted by age (AGE < 11)."
+#| fig-width: 11
+#| fig-height: 8
+
+df_age %>%
+  filter(AGE < 11) %>%
+  plot_sex_ratio(x_var = LENGTH, facet_var = AGE, show_labels = FALSE, facet_ncol = 4)
+```
+
+```{r}
+#| label: fig-mean-length-age-sex
+#| fig-cap: "Mean length by age (2-10) using records with non-missing ages, with sex shown by color and fishery management program shown by symbol."
+#| fig-width: 10
+#| fig-height: 6
+
+plot_mean_length_age_sex(
+  df_age,
+  color_var = "sex",
+  shape_var = "fmp"
+)
+```
+
+```{r}
+#| label: fig-mean-length-age-sex-fmp
+#| fig-cap: "Mean length by age (2-10) and sex using records with non-missing ages, faceted by fishery management program."
+#| fig-width: 11
+#| fig-height: 6
+
+plot_mean_length_age_sex(df_age, facet_fmp = TRUE, facet_ncol = 2)
+```
+
+```{r}
+#| label: fig-mean-length-age-sex-season-fmp
+#| fig-cap: "Mean length by age (2-10) using records with non-missing ages, faceted by sex with fishery management program shown in columns and season shown by color."
+#| fig-width: 12
+#| fig-height: 8
+
+plot_mean_length_age_sex(
+  df_age,
+  facet_rows = "sex",
+  facet_cols = "fmp",
+  color_var = "season",
+  facet_ncol = 1
+)
+```
+
+## References
+
+- Source script: `otoliths.R` (BSAI pollock fisheries otolith selector; created 2021-03-02).
+- Input data used here: `age1986-2025.csv`.
+- Query workflow used to generate age data is documented in `GetAgesSql.R`.
+- Ianelli, J., T. Honkalehto, S. Wassermann, A. McCarthy, S. Steinessen, C. McGilliard, and E. Siddon. 2024. *Assessment of walleye pollock in the eastern Bering Sea*. North Pacific Fishery Management Council, Anchorage, AK.

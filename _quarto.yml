@@ -1,0 +1,6 @@
+project:
+  output-dir: docs
+  render:
+    - otoliths_report.qmd
+  resources:
+    - images/
