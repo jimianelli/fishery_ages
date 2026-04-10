@@ -369,7 +369,7 @@ plot_mean_length_age_sex <- function(data, age_range = 2:10, facet_ncol = 6,
 
 ## Figures
 
-The all-years pooled comparisons are shown separately for GOA in @fig-sex-ratio-overall-goa and for BSAI in @fig-sex-ratio-overall-bsai. The length-based trend by year for GOA is shown in @fig-sex-ratio-length-year-goa, the corresponding BSAI view is shown in @fig-sex-ratio-length-year-bsai, age-based views by year are shown separately for GOA in @fig-sex-ratio-age-year-goa and for BSAI in @fig-sex-ratio-age-year-bsai, younger-age-focused views are shown separately for GOA in @fig-sex-ratio-length-age-goa and for BSAI in @fig-sex-ratio-length-age-bsai, and a SE_BS versus WGOA comparison split by season is shown in @fig-sex-ratio-length-age-subarea-season. Corresponding mean length-at-age views split by fishery management program are shown in @fig-mean-length-age-sex-fmp and @fig-mean-length-age-sex-season-fmp.
+The all-years pooled comparisons are shown separately for GOA in @fig-sex-ratio-overall-goa and for BSAI in @fig-sex-ratio-overall-bsai. The length-based trend by year for GOA is shown in @fig-sex-ratio-length-year-goa, the corresponding BSAI view is shown in @fig-sex-ratio-length-year-bsai, age-based views by year are shown separately for GOA in @fig-sex-ratio-age-year-goa and for BSAI in @fig-sex-ratio-age-year-bsai, and younger-age-focused views are shown separately for GOA in @fig-sex-ratio-length-age-goa and for BSAI in @fig-sex-ratio-length-age-bsai; the seasonal pattern is broadly similar between GOA and BSAI, but in both areas the age-4 panels suggest that fish sampled in the A season tend to be slightly larger than those sampled in the B season, which is somewhat counterintuitive. A Season B comparison of SE_BS versus NW_BS is shown in @fig-sex-ratio-length-age-sebs-nwbs-b, and a SE_BS versus WGOA comparison split by season is shown in @fig-sex-ratio-length-age-subarea-season. Corresponding mean length-at-age views split by fishery management program are shown in @fig-mean-length-age-sex-fmp and @fig-mean-length-age-sex-season-fmp.
 
 ```{r}
 #| label: fig-sex-ratio-overall-goa
@@ -507,7 +507,23 @@ df_age %>%
   )
 ```
 
-The seasonal pattern in @fig-sex-ratio-length-age-goa and @fig-sex-ratio-length-age-bsai is broadly similar between GOA and BSAI. In both areas, the age-4 panels suggest that fish sampled in the A season tend to be slightly larger than those sampled in the B season, which is somewhat counterintuitive.
+```{r}
+#| label: fig-sex-ratio-length-age-sebs-nwbs-b
+#| fig-cap: "Sex ratio (proportion female) by length for subareas SE_BS and NW_BS in Season B, faceted by age (AGE < 11), with subarea shown by color."
+#| fig-width: 11
+#| fig-height: 8
+
+df_age %>%
+  filter(AGE < 11, subarea %in% c("SE_BS", "NW_BS")) %>%
+  plot_sex_ratio(
+    x_var = LENGTH,
+    facet_var = AGE,
+    show_labels = FALSE,
+    facet_ncol = 4,
+    season_filter = "B",
+    color_var = "subarea"
+  )
+```
 
 ```{r}
 #| label: fig-sex-ratio-length-age-subarea-season
