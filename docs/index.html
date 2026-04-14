@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   </ul></li>
   </ul></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">4</span> Methods</a></li>
+  <li><a href="#methods-for-evaluating-fishery-data" id="toc-methods-for-evaluating-fishery-data" class="nav-link" data-scroll-target="#methods-for-evaluating-fishery-data"><span class="header-section-number">4</span> Methods (for evaluating fishery data)</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">5</span> Results</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
   </ul>
@@ -799,11 +799,13 @@ Figure&nbsp;13: Mean length by age (2-10) using records with non-missing ages, f
 </section>
 <section id="acoustic-survey-data" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="acoustic-survey-data"><span class="header-section-number">3.2</span> Acoustic survey data</h3>
+<p>These exploratory figures are based on the raw age-data records from the acoustic surveys and were used as an initial diagnostic prior to any expansion of the samples to acoustic-backscatter observations.</p>
 <p>Within each survey subsection, the first figure shows the all-years pooled acoustic-survey sex ratios across all samples, followed by the year-specific length-based view.</p>
 <section id="bering-sea-summer-acoustic-surveys" class="level4" data-number="3.2.1">
 <h4 data-number="3.2.1" class="anchored" data-anchor-id="bering-sea-summer-acoustic-surveys"><span class="header-section-number">3.2.1</span> Bering Sea summer acoustic surveys</h4>
 <section id="aggregated-over-years" class="level5" data-number="3.2.1.1">
 <h5 data-number="3.2.1.1" class="anchored" data-anchor-id="aggregated-over-years"><span class="header-section-number">3.2.1.1</span> Aggregated over years</h5>
+<p>The all-years pooled Bering Sea summer acoustic-survey comparison is shown in <a href="#fig-acoustic-sex-ratio-overall-bsai" class="quarto-xref">Figure&nbsp;14</a>, with age-based sex ratios on the top panel and 5-cm length-bin sex ratios on the bottom panel.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -833,6 +835,7 @@ Figure&nbsp;14: BSAI pooled acoustic-survey sex ratios across all samples: by ag
 </section>
 <section id="by-year" class="level5" data-number="3.2.1.2">
 <h5 data-number="3.2.1.2" class="anchored" data-anchor-id="by-year"><span class="header-section-number">3.2.1.2</span> By year</h5>
+<p>Year-specific Bering Sea summer acoustic-survey length-based sex ratios are shown in <a href="#fig-acoustic-sex-ratio-length-year-bsai" class="quarto-xref">Figure&nbsp;15</a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -871,6 +874,7 @@ Figure&nbsp;15: Acoustic survey sex ratio (proportion female) by 5-cm length bin
 <h4 data-number="3.2.2" class="anchored" data-anchor-id="goa-winter-acoustic-surveys"><span class="header-section-number">3.2.2</span> GOA winter acoustic surveys</h4>
 <section id="aggregated-over-years-1" class="level5" data-number="3.2.2.1">
 <h5 data-number="3.2.2.1" class="anchored" data-anchor-id="aggregated-over-years-1"><span class="header-section-number">3.2.2.1</span> Aggregated over years</h5>
+<p>The all-years pooled GOA winter acoustic-survey comparison is shown in <a href="#fig-acoustic-sex-ratio-overall-goa" class="quarto-xref">Figure&nbsp;16</a>, with age-based sex ratios on the top panel and 5-cm length-bin sex ratios on the bottom panel.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -900,6 +904,7 @@ Figure&nbsp;16: GOA pooled acoustic-survey sex ratios across all samples: by age
 </section>
 <section id="by-year-1" class="level5" data-number="3.2.2.2">
 <h5 data-number="3.2.2.2" class="anchored" data-anchor-id="by-year-1"><span class="header-section-number">3.2.2.2</span> By year</h5>
+<p>Year-specific GOA winter acoustic-survey length-based sex ratios are shown in <a href="#fig-acoustic-sex-ratio-length-year-goa" class="quarto-xref">Figure&nbsp;17</a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
@@ -936,8 +941,8 @@ Figure&nbsp;17: Acoustic survey sex ratio (proportion female) by 5-cm length bin
 </section>
 </section>
 </section>
-<section id="methods" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="methods"><span class="header-section-number">4</span> Methods</h2>
+<section id="methods-for-evaluating-fishery-data" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="methods-for-evaluating-fishery-data"><span class="header-section-number">4</span> Methods (for evaluating fishery data)</h2>
 <p>To keep the Bayesian analysis tractable within a renderable Quarto workflow, the fitted models below use cell-aggregated data rather than all 1.4 million individual observations. The key design choice from the EDA is retained: <code>fmp</code> is treated as the primary split category, and separate models are fit for <code>GOA</code> and <code>BSAI</code>.</p>
 <p>For sex ratio, the aggregated response is female count out of total <code>F + M</code> count within <code>YEAR x season x subarea x age x 5-cm length-bin</code> cells, excluding records coded <code>U</code>. Age 4 is used as the reference category so that the <code>seasonB</code> term is directly interpretable as the age-4 B-versus-A contrast after adjusting for length, year, and subarea. For growth, the aggregated response is mean length with its standard error within <code>YEAR x season x subarea x sex x age</code> cells, fit as a Gaussian measurement-error model. In both cases, the reduced formulation preserves the main contrasts of interest from the EDA: season, age, sex, year, subarea, and their comparison between <code>GOA</code> and <code>BSAI</code>.</p>
 <p>The implemented <code>brms</code> data preparation was:</p>

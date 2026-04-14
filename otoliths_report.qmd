@@ -618,11 +618,15 @@ df_acoust <- df_acoust_big |>
 
 ```
 
+These exploratory figures are based on the raw age-data records from the acoustic surveys and were used as an initial diagnostic prior to any expansion of the samples to acoustic-backscatter observations.
+
 Within each survey subsection, the first figure shows the all-years pooled acoustic-survey sex ratios across all samples, followed by the year-specific length-based view.
 
 #### Bering Sea summer acoustic surveys
 
 ##### Aggregated over years
+
+The all-years pooled Bering Sea summer acoustic-survey comparison is shown in @fig-acoustic-sex-ratio-overall-bsai, with age-based sex ratios on the top panel and 5-cm length-bin sex ratios on the bottom panel.
 
 ```{r}
 #| label: fig-acoustic-sex-ratio-overall-bsai
@@ -642,6 +646,8 @@ p_age_overall / p_length_overall + patchwork::plot_layout(heights = c(1, 1))
 ```
 
 ##### By year
+
+Year-specific Bering Sea summer acoustic-survey length-based sex ratios are shown in @fig-acoustic-sex-ratio-length-year-bsai.
 
 ```{r}
 #| label: fig-acoustic-sex-ratio-length-year-bsai
@@ -671,6 +677,8 @@ df_acoust %>%
 
 ##### Aggregated over years
 
+The all-years pooled GOA winter acoustic-survey comparison is shown in @fig-acoustic-sex-ratio-overall-goa, with age-based sex ratios on the top panel and 5-cm length-bin sex ratios on the bottom panel.
+
 ```{r}
 #| label: fig-acoustic-sex-ratio-overall-goa
 #| fig-cap: "GOA pooled acoustic-survey sex ratios across all samples: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."
@@ -689,6 +697,8 @@ p_age_overall / p_length_overall + patchwork::plot_layout(heights = c(1, 1))
 ```
 
 ##### By year
+
+Year-specific GOA winter acoustic-survey length-based sex ratios are shown in @fig-acoustic-sex-ratio-length-year-goa.
 
 ```{r}
 #| label: fig-acoustic-sex-ratio-length-year-goa
@@ -715,7 +725,7 @@ df_acoust %>%
 
 
 
-## Methods
+## Methods (for evaluating fishery data)
 
 To keep the Bayesian analysis tractable within a renderable Quarto workflow, the fitted models below use cell-aggregated data rather than all 1.4 million individual observations. The key design choice from the EDA is retained: `fmp` is treated as the primary split category, and separate models are fit for `GOA` and `BSAI`.
 
