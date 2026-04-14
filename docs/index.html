@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Jim Ianelli">
-<meta name="dcterms.date" content="2026-04-10">
+<meta name="dcterms.date" content="2026-04-14">
 
 <title>BSAI Pollock Otolith Figures</title>
 <style>
@@ -89,8 +89,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2</span> Setup</a></li>
-  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures"><span class="header-section-number">3</span> Figures</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">4</span> References</a></li>
+  <li><a href="#exploratory-figures" id="toc-exploratory-figures" class="nav-link" data-scroll-target="#exploratory-figures"><span class="header-section-number">3</span> Exploratory figures</a>
+  <ul>
+  <li><a href="#fishery-data" id="toc-fishery-data" class="nav-link" data-scroll-target="#fishery-data"><span class="header-section-number">3.1</span> Fishery data</a></li>
+  <li><a href="#acoustic-survey-data" id="toc-acoustic-survey-data" class="nav-link" data-scroll-target="#acoustic-survey-data"><span class="header-section-number">3.2</span> Acoustic survey data</a>
+  <ul>
+  <li><a href="#bering-sea-summer-acoustic-surveys" id="toc-bering-sea-summer-acoustic-surveys" class="nav-link" data-scroll-target="#bering-sea-summer-acoustic-surveys"><span class="header-section-number">3.2.1</span> Bering Sea summer acoustic surveys</a>
+  <ul>
+  <li><a href="#aggregated-over-years" id="toc-aggregated-over-years" class="nav-link" data-scroll-target="#aggregated-over-years"><span class="header-section-number">3.2.1.1</span> Aggregated over years</a></li>
+  <li><a href="#by-year" id="toc-by-year" class="nav-link" data-scroll-target="#by-year"><span class="header-section-number">3.2.1.2</span> By year</a></li>
+  </ul></li>
+  <li><a href="#goa-winter-acoustic-surveys" id="toc-goa-winter-acoustic-surveys" class="nav-link" data-scroll-target="#goa-winter-acoustic-surveys"><span class="header-section-number">3.2.2</span> GOA winter acoustic surveys</a>
+  <ul>
+  <li><a href="#aggregated-over-years-1" id="toc-aggregated-over-years-1" class="nav-link" data-scroll-target="#aggregated-over-years-1"><span class="header-section-number">3.2.2.1</span> Aggregated over years</a></li>
+  <li><a href="#by-year-1" id="toc-by-year-1" class="nav-link" data-scroll-target="#by-year-1"><span class="header-section-number">3.2.2.2</span> By year</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods"><span class="header-section-number">4</span> Methods</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">5</span> Results</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">6</span> References</a></li>
   </ul>
 </nav>
 </div>
@@ -115,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 10, 2026</p>
+      <p class="date">April 14, 2026</p>
     </div>
   </div>
   
@@ -259,7 +277,7 @@ Figure&nbsp;1: Estimated EBS pollock catch numbers by sex for the A season (Janu
 <span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">fmp_filter =</span> <span class="cn">NULL</span>, <span class="at">facet_season =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">facet_fmp =</span> <span class="cn">FALSE</span>) {</span>
 <span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>  facet_vars <span class="ot">&lt;-</span> <span class="fu">build_facet_vars</span>(<span class="at">facet_season =</span> facet_season, <span class="at">facet_fmp =</span> facet_fmp)</span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>  group_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(facet_vars, rlang<span class="sc">::</span><span class="fu">quos</span>(YEAR, age_group))</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>  group_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(facet_vars, rlang<span class="sc">::</span><span class="fu">quos</span>(age_group))</span>
 <span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>  plot_df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_plot_data</span>(<span class="at">season_filter =</span> season_filter, <span class="at">fmp_filter =</span> fmp_filter) <span class="sc">%&gt;%</span></span>
@@ -281,183 +299,199 @@ Figure&nbsp;1: Estimated EBS pollock catch numbers by sex for the A season (Janu
 <span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">any</span>(plot_df<span class="sc">$</span>age_group <span class="sc">==</span> <span class="st">"13+"</span>)) <span class="st">"13+"</span> <span class="cf">else</span> <span class="fu">character</span>(<span class="dv">0</span>)</span>
 <span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>  plot_df <span class="ot">&lt;-</span> plot_df <span class="sc">%&gt;%</span></span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">age_group =</span> <span class="fu">factor</span>(age_group, <span class="at">levels =</span> age_levels))</span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_df, <span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> sex_ratio)) <span class="sc">+</span></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"gray85"</span>, <span class="at">color =</span> <span class="st">"gray35"</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun =</span> median, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="fl">1.6</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> y_limits) <span class="sc">+</span></span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Age (13+ pooled)"</span>,</span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Sex Ratio"</span></span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>)</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(facet_vars) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(<span class="sc">!!!</span>facet_vars), <span class="at">ncol =</span> facet_ncol)</span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>  p</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>plot_sex_ratio_length_box <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">bin_width =</span> <span class="dv">5</span>, <span class="at">min_n =</span> <span class="dv">50</span>,</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">y_limits =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>), <span class="at">facet_ncol =</span> <span class="dv">6</span>,</span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">season_filter =</span> <span class="cn">NULL</span>, <span class="at">fmp_filter =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">facet_season =</span> <span class="cn">FALSE</span>, <span class="at">facet_fmp =</span> <span class="cn">FALSE</span>) {</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>  facet_vars <span class="ot">&lt;-</span> <span class="fu">build_facet_vars</span>(<span class="at">facet_season =</span> facet_season, <span class="at">facet_fmp =</span> facet_fmp)</span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>  group_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(facet_vars, rlang<span class="sc">::</span><span class="fu">quos</span>(YEAR, length_bin_lower))</span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>  plot_df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_plot_data</span>(<span class="at">season_filter =</span> season_filter, <span class="at">fmp_filter =</span> fmp_filter) <span class="sc">%&gt;%</span></span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(LENGTH <span class="sc">&gt;=</span> <span class="dv">20</span>, LENGTH <span class="sc">&lt;=</span> <span class="dv">65</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>      <span class="at">is_female =</span> <span class="fu">if_else</span>(SEX <span class="sc">==</span> <span class="st">"F"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>      <span class="at">length_bin_lower =</span> <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> bin_width) <span class="sc">*</span> bin_width <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>)</span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!!</span>group_vars) <span class="sc">%&gt;%</span></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>      <span class="at">total_n =</span> <span class="fu">n</span>(),</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>      <span class="at">sex_ratio =</span> <span class="fu">mean</span>(is_female),</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(total_n <span class="sc">&gt;=</span> min_n) <span class="sc">%&gt;%</span></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>      <span class="at">length_bin =</span> <span class="fu">if_else</span>(</span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>        length_bin_lower <span class="sc">==</span> <span class="dv">60</span>,</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>        <span class="st">"60-65"</span>,</span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(length_bin_lower, <span class="st">"-"</span>, length_bin_lower <span class="sc">+</span> (bin_width <span class="sc">-</span> <span class="dv">1</span>))</span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>      <span class="at">length_bin =</span> <span class="fu">factor</span>(length_bin, <span class="at">levels =</span> <span class="fu">unique</span>(length_bin[<span class="fu">order</span>(length_bin_lower)]))</span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_df, <span class="fu">aes</span>(<span class="at">x =</span> length_bin, <span class="at">y =</span> sex_ratio)) <span class="sc">+</span></span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"gray85"</span>, <span class="at">color =</span> <span class="st">"gray35"</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>    <span class="fu">stat_summary</span>(<span class="at">fun =</span> median, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="fl">1.6</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> y_limits) <span class="sc">+</span></span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Length Bin (cm, 20-65)"</span>,</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Sex Ratio"</span></span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(facet_vars) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(<span class="sc">!!!</span>facet_vars), <span class="at">ncol =</span> facet_ncol)</span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>  p</span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>plot_mean_length_age_sex <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">age_range =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">facet_ncol =</span> <span class="dv">6</span>,</span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">season_filter =</span> <span class="cn">NULL</span>, <span class="at">fmp_filter =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">facet_season =</span> <span class="cn">FALSE</span>, <span class="at">facet_fmp =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">facet_sex =</span> <span class="cn">FALSE</span>, <span class="at">color_var =</span> <span class="st">"sex"</span>,</span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">shape_var =</span> <span class="cn">NULL</span>, <span class="at">facet_rows =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">facet_cols =</span> <span class="cn">NULL</span>, <span class="at">linetype_var =</span> <span class="cn">NULL</span>) {</span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>  facet_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (facet_season) <span class="st">"season"</span>,</span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (facet_fmp) <span class="st">"fmp"</span>,</span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (facet_sex) <span class="st">"sex"</span></span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>  facet_grid_names <span class="ot">&lt;-</span> <span class="fu">c</span>(facet_rows, facet_cols)</span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>  group_names <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(facet_names, facet_grid_names, <span class="st">"age_num"</span>, <span class="st">"sex"</span>, color_var, shape_var, linetype_var))</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>      <span class="at">age_group =</span> <span class="fu">factor</span>(age_group, <span class="at">levels =</span> age_levels),</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>      <span class="at">age_num =</span> <span class="fu">if_else</span>(age_group <span class="sc">==</span> <span class="st">"13+"</span>, <span class="dv">13</span>, <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(age_group)))</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_df, <span class="fu">aes</span>(<span class="at">x =</span> age_num, <span class="at">y =</span> sex_ratio)) <span class="sc">+</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> total_n), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>) <span class="sc">+</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> y_limits) <span class="sc">+</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fu">as.integer</span>(age_levels[age_levels <span class="sc">!=</span> <span class="st">"13+"</span>]), <span class="cf">if</span> (<span class="st">"13+"</span> <span class="sc">%in%</span> age_levels) <span class="dv">13</span> <span class="cf">else</span> <span class="fu">numeric</span>(<span class="dv">0</span>)),</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> age_levels</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Age (13+ pooled)"</span>,</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Sex Ratio"</span>,</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="st">"Sample Size"</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>)</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(facet_vars) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(<span class="sc">!!!</span>facet_vars), <span class="at">ncol =</span> facet_ncol)</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>  p</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>plot_sex_ratio_length_box <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">bin_width =</span> <span class="dv">5</span>, <span class="at">min_n =</span> <span class="dv">50</span>,</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">y_limits =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>), <span class="at">facet_ncol =</span> <span class="dv">6</span>,</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">season_filter =</span> <span class="cn">NULL</span>, <span class="at">fmp_filter =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">facet_season =</span> <span class="cn">FALSE</span>, <span class="at">facet_fmp =</span> <span class="cn">FALSE</span>) {</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>  facet_vars <span class="ot">&lt;-</span> <span class="fu">build_facet_vars</span>(<span class="at">facet_season =</span> facet_season, <span class="at">facet_fmp =</span> facet_fmp)</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>  group_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(facet_vars, rlang<span class="sc">::</span><span class="fu">quos</span>(length_bin_lower))</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>  plot_df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_plot_data</span>(<span class="at">season_filter =</span> season_filter, <span class="at">fmp_filter =</span> fmp_filter) <span class="sc">%&gt;%</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(LENGTH <span class="sc">&gt;=</span> <span class="dv">20</span>, LENGTH <span class="sc">&lt;=</span> <span class="dv">65</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>      <span class="at">is_female =</span> <span class="fu">if_else</span>(SEX <span class="sc">==</span> <span class="st">"F"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>      <span class="at">length_bin_lower =</span> <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> bin_width) <span class="sc">*</span> bin_width <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>)</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="sc">!!!</span>group_vars) <span class="sc">%&gt;%</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>      <span class="at">total_n =</span> <span class="fu">n</span>(),</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>      <span class="at">sex_ratio =</span> <span class="fu">mean</span>(is_female),</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(total_n <span class="sc">&gt;=</span> min_n) <span class="sc">%&gt;%</span></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>      <span class="at">length_bin_mid =</span> <span class="fu">if_else</span>(length_bin_lower <span class="sc">==</span> <span class="dv">60</span>, <span class="fl">62.5</span>, length_bin_lower <span class="sc">+</span> bin_width <span class="sc">/</span> <span class="dv">2</span>),</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>      <span class="at">length_bin =</span> <span class="fu">if_else</span>(</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>        length_bin_lower <span class="sc">==</span> <span class="dv">60</span>,</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>        <span class="st">"60-65"</span>,</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>        <span class="fu">paste0</span>(length_bin_lower, <span class="st">"-"</span>, length_bin_lower <span class="sc">+</span> (bin_width <span class="sc">-</span> <span class="dv">1</span>))</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>      <span class="at">length_bin =</span> <span class="fu">factor</span>(length_bin, <span class="at">levels =</span> <span class="fu">unique</span>(length_bin[<span class="fu">order</span>(length_bin_lower)]))</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_df, <span class="fu">aes</span>(<span class="at">x =</span> length_bin_mid, <span class="at">y =</span> sex_ratio)) <span class="sc">+</span></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> total_n), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>) <span class="sc">+</span></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> y_limits) <span class="sc">+</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">unique</span>(plot_df<span class="sc">$</span>length_bin_mid[<span class="fu">order</span>(plot_df<span class="sc">$</span>length_bin_lower)]),</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">unique</span>(plot_df<span class="sc">$</span>length_bin[<span class="fu">order</span>(plot_df<span class="sc">$</span>length_bin_lower)])</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Length Bin (cm, 20-65)"</span>,</span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Sex Ratio"</span>,</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>      <span class="at">size =</span> <span class="st">"Sample Size"</span></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(facet_vars) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(<span class="sc">!!!</span>facet_vars), <span class="at">ncol =</span> facet_ncol)</span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>  p</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>  plot_df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_plot_data</span>(<span class="at">season_filter =</span> season_filter, <span class="at">fmp_filter =</span> fmp_filter) <span class="sc">%&gt;%</span></span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(AGE), <span class="sc">!</span><span class="fu">is.na</span>(LENGTH)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>      <span class="at">age_num =</span> <span class="fu">as.numeric</span>(AGE),</span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>      <span class="at">sex =</span> <span class="fu">recode</span>(SEX, <span class="at">F =</span> <span class="st">"Female"</span>, <span class="at">M =</span> <span class="st">"Male"</span>)</span>
-<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(age_num <span class="sc">&gt;=</span> <span class="fu">min</span>(age_range), age_num <span class="sc">&lt;=</span> <span class="fu">max</span>(age_range)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(group_names))) <span class="sc">%&gt;%</span></span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_length =</span> <span class="fu">mean</span>(LENGTH, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>plot_mean_length_age_sex <span class="ot">&lt;-</span> <span class="cf">function</span>(data, <span class="at">age_range =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">facet_ncol =</span> <span class="dv">6</span>,</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">season_filter =</span> <span class="cn">NULL</span>, <span class="at">fmp_filter =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">facet_season =</span> <span class="cn">FALSE</span>, <span class="at">facet_fmp =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">facet_sex =</span> <span class="cn">FALSE</span>, <span class="at">color_var =</span> <span class="st">"sex"</span>,</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">shape_var =</span> <span class="cn">NULL</span>, <span class="at">facet_rows =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">facet_cols =</span> <span class="cn">NULL</span>, <span class="at">linetype_var =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>  facet_names <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (facet_season) <span class="st">"season"</span>,</span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (facet_fmp) <span class="st">"fmp"</span>,</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (facet_sex) <span class="st">"sex"</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>  facet_grid_names <span class="ot">&lt;-</span> <span class="fu">c</span>(facet_rows, facet_cols)</span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>  group_names <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(facet_names, facet_grid_names, <span class="st">"age_num"</span>, <span class="st">"sex"</span>, color_var, shape_var, linetype_var))</span>
 <span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>  plot_mapping <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">x =</span> age_num, <span class="at">y =</span> mean_length)</span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>  plot_mapping<span class="sc">$</span>colour <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">sym</span>(color_var)</span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(shape_var)) {</span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>    plot_mapping<span class="sc">$</span>shape <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">sym</span>(shape_var)</span>
-<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(linetype_var)) {</span>
-<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>    plot_mapping<span class="sc">$</span>linetype <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">sym</span>(linetype_var)</span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>  line_group_names <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(color_var, shape_var, linetype_var, <span class="cf">if</span> (<span class="sc">!</span>facet_sex) <span class="st">"sex"</span>))</span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>  plot_mapping<span class="sc">$</span>group <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">expr</span>(<span class="fu">interaction</span>(<span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(line_group_names), <span class="at">drop =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a>  color_label <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>    color_var,</span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sex"</span> <span class="sc">~</span> <span class="st">"Sex"</span>,</span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>    <span class="st">"season"</span> <span class="sc">~</span> <span class="st">"Season"</span>,</span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fmp"</span> <span class="sc">~</span> <span class="st">"FMP"</span>,</span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> color_var</span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>  shape_label <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(shape_var)) {</span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>    <span class="cn">NULL</span></span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
-<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>      shape_var,</span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>      <span class="st">"sex"</span> <span class="sc">~</span> <span class="st">"Sex"</span>,</span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>      <span class="st">"season"</span> <span class="sc">~</span> <span class="st">"Season"</span>,</span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>      <span class="st">"fmp"</span> <span class="sc">~</span> <span class="st">"FMP"</span>,</span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> shape_var</span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>  linetype_label <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(linetype_var)) {</span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>    <span class="cn">NULL</span></span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
-<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>      linetype_var,</span>
-<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>      <span class="st">"sex"</span> <span class="sc">~</span> <span class="st">"Sex"</span>,</span>
-<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>      <span class="st">"season"</span> <span class="sc">~</span> <span class="st">"Season"</span>,</span>
-<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>      <span class="st">"fmp"</span> <span class="sc">~</span> <span class="st">"FMP"</span>,</span>
-<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> linetype_var</span>
-<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_df, plot_mapping) <span class="sc">+</span></span>
-<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.4</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
-<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> age_range) <span class="sc">+</span></span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Mean Length"</span>,</span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> color_label,</span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a>      <span class="at">shape =</span> shape_label,</span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a>      <span class="at">linetype =</span> linetype_label</span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>)</span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(facet_rows) <span class="sc">||</span> <span class="sc">!</span><span class="fu">is.null</span>(facet_cols)) {</span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>    row_vars <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(facet_rows)) <span class="fu">list</span>(.) <span class="cf">else</span> rlang<span class="sc">::</span><span class="fu">syms</span>(facet_rows)</span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>    col_vars <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(facet_cols)) <span class="fu">list</span>(.) <span class="cf">else</span> rlang<span class="sc">::</span><span class="fu">syms</span>(facet_cols)</span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(<span class="sc">!!!</span>row_vars), <span class="at">cols =</span> <span class="fu">vars</span>(<span class="sc">!!!</span>col_vars))</span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">length</span>(facet_names) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(<span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(facet_names)), <span class="at">ncol =</span> facet_ncol)</span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>  p</span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>  plot_df <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter_plot_data</span>(<span class="at">season_filter =</span> season_filter, <span class="at">fmp_filter =</span> fmp_filter) <span class="sc">%&gt;%</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(AGE), <span class="sc">!</span><span class="fu">is.na</span>(LENGTH)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>      <span class="at">age_num =</span> <span class="fu">as.numeric</span>(AGE),</span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>      <span class="at">sex =</span> <span class="fu">recode</span>(SEX, <span class="at">F =</span> <span class="st">"Female"</span>, <span class="at">M =</span> <span class="st">"Male"</span>)</span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(age_num <span class="sc">&gt;=</span> <span class="fu">min</span>(age_range), age_num <span class="sc">&lt;=</span> <span class="fu">max</span>(age_range)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(group_names))) <span class="sc">%&gt;%</span></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>      <span class="at">mean_length =</span> <span class="fu">mean</span>(LENGTH, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>      <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>  plot_mapping <span class="ot">&lt;-</span> <span class="fu">aes</span>(<span class="at">x =</span> age_num, <span class="at">y =</span> mean_length)</span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>  plot_mapping<span class="sc">$</span>colour <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">sym</span>(color_var)</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(shape_var)) {</span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>    plot_mapping<span class="sc">$</span>shape <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">sym</span>(shape_var)</span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(linetype_var)) {</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>    plot_mapping<span class="sc">$</span>linetype <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">sym</span>(linetype_var)</span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>  line_group_names <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(color_var, shape_var, linetype_var, <span class="cf">if</span> (<span class="sc">!</span>facet_sex) <span class="st">"sex"</span>))</span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>  plot_mapping<span class="sc">$</span>group <span class="ot">&lt;-</span> rlang<span class="sc">::</span><span class="fu">expr</span>(<span class="fu">interaction</span>(<span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(line_group_names), <span class="at">drop =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>  color_label <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>    color_var,</span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sex"</span> <span class="sc">~</span> <span class="st">"Sex"</span>,</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>    <span class="st">"season"</span> <span class="sc">~</span> <span class="st">"Season"</span>,</span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>    <span class="st">"fmp"</span> <span class="sc">~</span> <span class="st">"FMP"</span>,</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">.default =</span> color_var</span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>  shape_label <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(shape_var)) {</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>    <span class="cn">NULL</span></span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>      shape_var,</span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>      <span class="st">"sex"</span> <span class="sc">~</span> <span class="st">"Sex"</span>,</span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>      <span class="st">"season"</span> <span class="sc">~</span> <span class="st">"Season"</span>,</span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>      <span class="st">"fmp"</span> <span class="sc">~</span> <span class="st">"FMP"</span>,</span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> shape_var</span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>  linetype_label <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(linetype_var)) {</span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>    <span class="cn">NULL</span></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">case_match</span>(</span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a>      linetype_var,</span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>      <span class="st">"sex"</span> <span class="sc">~</span> <span class="st">"Sex"</span>,</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a>      <span class="st">"season"</span> <span class="sc">~</span> <span class="st">"Season"</span>,</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a>      <span class="st">"fmp"</span> <span class="sc">~</span> <span class="st">"FMP"</span>,</span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> linetype_var</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(plot_df, plot_mapping) <span class="sc">+</span></span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.4</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">formula =</span> <span class="st">"y ~ x"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linewidth =</span> <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> age_range) <span class="sc">+</span></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(</span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"Mean Length"</span>,</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> color_label,</span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>      <span class="at">shape =</span> shape_label,</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>      <span class="at">linetype =</span> linetype_label</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>)</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(facet_rows) <span class="sc">||</span> <span class="sc">!</span><span class="fu">is.null</span>(facet_cols)) {</span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a>    row_vars <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(facet_rows)) <span class="fu">list</span>(.) <span class="cf">else</span> rlang<span class="sc">::</span><span class="fu">syms</span>(facet_rows)</span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a>    col_vars <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">is.null</span>(facet_cols)) <span class="fu">list</span>(.) <span class="cf">else</span> rlang<span class="sc">::</span><span class="fu">syms</span>(facet_cols)</span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(<span class="sc">!!!</span>row_vars), <span class="at">cols =</span> <span class="fu">vars</span>(<span class="sc">!!!</span>col_vars))</span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> (<span class="fu">length</span>(facet_names) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(<span class="sc">!!!</span>rlang<span class="sc">::</span><span class="fu">syms</span>(facet_names)), <span class="at">ncol =</span> facet_ncol)</span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>  p</span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
-<section id="figures" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="figures"><span class="header-section-number">3</span> Figures</h2>
-<p>The all-years pooled comparisons are shown separately for GOA in <a href="#fig-sex-ratio-overall-goa" class="quarto-xref">Figure&nbsp;2</a> and for BSAI in <a href="#fig-sex-ratio-overall-bsai" class="quarto-xref">Figure&nbsp;3</a>. The length-based trend by year for GOA is shown in <a href="#fig-sex-ratio-length-year-goa" class="quarto-xref">Figure&nbsp;4</a>, the corresponding BSAI view is shown in <a href="#fig-sex-ratio-length-year-bsai" class="quarto-xref">Figure&nbsp;5</a>, age-based views by year are shown separately for GOA in <a href="#fig-sex-ratio-age-year-goa" class="quarto-xref">Figure&nbsp;6</a> and for BSAI in <a href="#fig-sex-ratio-age-year-bsai" class="quarto-xref">Figure&nbsp;7</a>, and younger-age-focused views are shown separately for GOA in <a href="#fig-sex-ratio-length-age-goa" class="quarto-xref">Figure&nbsp;8</a> and for BSAI in <a href="#fig-sex-ratio-length-age-bsai" class="quarto-xref">Figure&nbsp;9</a>; the seasonal pattern is broadly similar between GOA and BSAI, but in both areas the age-4 panels suggest that fish sampled in the A season tend to be slightly larger than those sampled in the B season, which is somewhat counterintuitive. A Season B comparison of SE_BS versus NW_BS is shown in <a href="#fig-sex-ratio-length-age-sebs-nwbs-b" class="quarto-xref">Figure&nbsp;10</a>, and a SE_BS versus WGOA comparison split by season is shown in <a href="#fig-sex-ratio-length-age-subarea-season" class="quarto-xref">Figure&nbsp;11</a>. Corresponding mean length-at-age views split by fishery management program are shown in <a href="#fig-mean-length-age-sex-fmp" class="quarto-xref">Figure&nbsp;12</a> and <a href="#fig-mean-length-age-sex-season-fmp" class="quarto-xref">Figure&nbsp;13</a>.</p>
+<section id="exploratory-figures" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="exploratory-figures"><span class="header-section-number">3</span> Exploratory figures</h2>
+<section id="fishery-data" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="fishery-data"><span class="header-section-number">3.1</span> Fishery data</h3>
+<p>The all-years pooled comparisons are shown separately for GOA in <a href="#fig-sex-ratio-overall-goa" class="quarto-xref">Figure&nbsp;2</a> and for BSAI in <a href="#fig-sex-ratio-overall-bsai" class="quarto-xref">Figure&nbsp;3</a>. The length-based trend by year for GOA is shown in <a href="#fig-sex-ratio-length-year-goa" class="quarto-xref">Figure&nbsp;4</a>, the corresponding BSAI view is shown in <a href="#fig-sex-ratio-length-year-bsai" class="quarto-xref">Figure&nbsp;5</a>, age-based views by year are shown separately for GOA in <a href="#fig-sex-ratio-age-year-goa" class="quarto-xref">Figure&nbsp;6</a> and for BSAI in <a href="#fig-sex-ratio-age-year-bsai" class="quarto-xref">Figure&nbsp;7</a>, and younger-age-focused views are shown separately for GOA in <a href="#fig-sex-ratio-length-age-goa" class="quarto-xref">Figure&nbsp;8</a> and for BSAI in <a href="#fig-sex-ratio-length-age-bsai" class="quarto-xref">Figure&nbsp;9</a>; the seasonal pattern is broadly similar between GOA and BSAI, but in both areas the age-4 panels suggest that fish sampled in the A season tend to be slightly larger than those sampled in the B season, which is somewhat counterintuitive. A Season B comparison of SE_BS versus NW_BS is shown in <a href="#fig-sex-ratio-length-age-sebs-nwbs-b" class="quarto-xref">Figure&nbsp;10</a>, and a Season B comparison of SE_BS versus WGOA for ages 3-10 is shown in <a href="#fig-sex-ratio-length-age-subarea-season" class="quarto-xref">Figure&nbsp;11</a>. Corresponding mean length-at-age views split by fishery management program are shown in <a href="#fig-mean-length-age-sex-fmp" class="quarto-xref">Figure&nbsp;12</a> and <a href="#fig-mean-length-age-sex-season-fmp" class="quarto-xref">Figure&nbsp;13</a>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="ot">&lt;-</span> <span class="fu">plot_sex_ratio_age_box</span>(df_age, <span class="at">min_n =</span> <span class="dv">25</span>, <span class="at">fmp_filter =</span> <span class="st">"GOA"</span>) <span class="sc">+</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GOA: By Age (Across Years)"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GOA: By Age (All Samples Pooled)"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>p_length_overall <span class="ot">&lt;-</span> <span class="fu">plot_sex_ratio_length_box</span>(df_age, <span class="at">bin_width =</span> <span class="dv">5</span>, <span class="at">min_n =</span> <span class="dv">50</span>, <span class="at">fmp_filter =</span> <span class="st">"GOA"</span>) <span class="sc">+</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GOA: By Length (Across Years)"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GOA: By Length (All Samples Pooled)"</span>)</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="sc">/</span> p_length_overall <span class="sc">+</span> patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -465,10 +499,10 @@ Figure&nbsp;1: Estimated EBS pollock catch numbers by sex for the A season (Janu
 <div id="fig-sex-ratio-overall-goa" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sex-ratio-overall-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-sex-ratio-overall-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: GOA distribution across year-specific sex ratios: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-overall-goa-1.png" class="img-fluid figure-img" width="960"></a>
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-overall-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;2: GOA pooled sex ratios across all samples: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-overall-goa-1.png" class="img-fluid figure-img" width="960"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-overall-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: GOA distribution across year-specific sex ratios: by age with ages &gt;13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom).
+Figure&nbsp;2: GOA pooled sex ratios across all samples: by age with ages &gt;13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom).
 </figcaption>
 </figure>
 </div>
@@ -478,10 +512,10 @@ Figure&nbsp;2: GOA distribution across year-specific sex ratios: by age with age
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="ot">&lt;-</span> <span class="fu">plot_sex_ratio_age_box</span>(df_age, <span class="at">min_n =</span> <span class="dv">25</span>, <span class="at">fmp_filter =</span> <span class="st">"BSAI"</span>) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"BSAI: By Age (Across Years)"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"BSAI: By Age (All Samples Pooled)"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>p_length_overall <span class="ot">&lt;-</span> <span class="fu">plot_sex_ratio_length_box</span>(df_age, <span class="at">bin_width =</span> <span class="dv">5</span>, <span class="at">min_n =</span> <span class="dv">50</span>, <span class="at">fmp_filter =</span> <span class="st">"BSAI"</span>) <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"BSAI: By Length (Across Years)"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"BSAI: By Length (All Samples Pooled)"</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="sc">/</span> p_length_overall <span class="sc">+</span> patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
@@ -489,10 +523,10 @@ Figure&nbsp;2: GOA distribution across year-specific sex ratios: by age with age
 <div id="fig-sex-ratio-overall-bsai" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sex-ratio-overall-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-sex-ratio-overall-bsai-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: BSAI distribution across year-specific sex ratios: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-overall-bsai-1.png" class="img-fluid figure-img" width="960"></a>
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-overall-bsai-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;3: BSAI pooled sex ratios across all samples: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-overall-bsai-1.png" class="img-fluid figure-img" width="960"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-overall-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: BSAI distribution across year-specific sex ratios: by age with ages &gt;13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom).
+Figure&nbsp;3: BSAI pooled sex ratios across all samples: by age with ages &gt;13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom).
 </figcaption>
 </figure>
 </div>
@@ -502,24 +536,30 @@ Figure&nbsp;3: BSAI distribution across year-specific sex ratios: by age with ag
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_age <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&gt;</span> <span class="dv">2000</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> LENGTH,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> YEAR,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_n =</span> <span class="dv">100</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">5</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"GOA"</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(YEAR <span class="sc">&gt;</span> <span class="dv">2000</span>, LENGTH <span class="sc">&gt;=</span> <span class="dv">20</span>, LENGTH <span class="sc">&lt;=</span> <span class="dv">65</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">length_bin_mid =</span> <span class="fu">if_else</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">60</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">62.5</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>) <span class="sc">+</span> <span class="fl">2.5</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> length_bin_mid,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> YEAR,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_n =</span> <span class="dv">100</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">5</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"GOA"</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">color_var =</span> <span class="st">"season"</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-sex-ratio-length-year-goa" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sex-ratio-length-year-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-sex-ratio-length-year-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Sex ratio (proportion female) by length for GOA, faceted by year (YEAR > 2000; min_n = 100)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-length-year-goa-1.png" class="img-fluid figure-img" width="1152"></a>
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-length-year-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;4: Sex ratio (proportion female) by 5-cm length bins for GOA, faceted by year with season shown by color (YEAR > 2000; min_n = 100)."><img src="otoliths_report_files/figure-html/fig-sex-ratio-length-year-goa-1.png" class="img-fluid figure-img" width="1152"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-length-year-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Sex ratio (proportion female) by length for GOA, faceted by year (YEAR &gt; 2000; min_n = 100).
+Figure&nbsp;4: Sex ratio (proportion female) by 5-cm length bins for GOA, faceted by year with season shown by color (YEAR &gt; 2000; min_n = 100).
 </figcaption>
 </figure>
 </div>
@@ -689,40 +729,26 @@ Figure&nbsp;10: Sex ratio (proportion female) by length for subareas SE_BS and N
 <details class="code-fold">
 <summary>Show code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>subarea_compare <span class="ot">&lt;-</span> df_age <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(AGE <span class="sc">&lt;</span> <span class="dv">11</span>, subarea <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"SE_BS"</span>, <span class="st">"WGOA"</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dplyr<span class="sc">::</span><span class="fu">between</span>(AGE, <span class="dv">3</span>, <span class="dv">10</span>), subarea <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"SE_BS"</span>, <span class="st">"WGOA"</span>))</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>p_subarea_a <span class="ot">&lt;-</span> subarea_compare <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>subarea_compare <span class="sc">%&gt;%</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> LENGTH,</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> AGE,</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">4</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">season_filter =</span> <span class="st">"A"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">season_filter =</span> <span class="st">"B"</span>,</span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color_var =</span> <span class="st">"subarea"</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Season A: SE_BS vs WGOA"</span>)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>p_subarea_b <span class="ot">&lt;-</span> subarea_compare <span class="sc">%&gt;%</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> LENGTH,</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> AGE,</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">4</span>,</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">season_filter =</span> <span class="st">"B"</span>,</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">color_var =</span> <span class="st">"subarea"</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Season B: SE_BS vs WGOA"</span>)</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>p_subarea_a <span class="sc">/</span> p_subarea_b <span class="sc">+</span> patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-sex-ratio-length-age-subarea-season" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sex-ratio-length-age-subarea-season-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="otoliths_report_files/figure-html/fig-sex-ratio-length-age-subarea-season-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;11: Sex ratio (proportion female) by length for subareas SE_BS and WGOA, faceted by age (AGE < 11), with subarea shown by color and separate plots for A and B seasons."><img src="otoliths_report_files/figure-html/fig-sex-ratio-length-age-subarea-season-1.png" class="img-fluid figure-img" width="1056"></a>
+<a href="otoliths_report_files/figure-html/fig-sex-ratio-length-age-subarea-season-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" title="Figure&nbsp;11: Sex ratio (proportion female) by length for subareas SE_BS and WGOA in Season B, faceted by age (ages 3-10), with subarea shown by color."><img src="otoliths_report_files/figure-html/fig-sex-ratio-length-age-subarea-season-1.png" class="img-fluid figure-img" width="1056"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sex-ratio-length-age-subarea-season-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;11: Sex ratio (proportion female) by length for subareas SE_BS and WGOA, faceted by age (AGE &lt; 11), with subarea shown by color and separate plots for A and B seasons.
+Figure&nbsp;11: Sex ratio (proportion female) by length for subareas SE_BS and WGOA in Season B, faceted by age (ages 3-10), with subarea shown by color.
 </figcaption>
 </figure>
 </div>
@@ -777,8 +803,1875 @@ Figure&nbsp;13: Mean length by age (2-10) using records with non-missing ages, f
 </div>
 </div>
 </section>
-<section id="references" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="references"><span class="header-section-number">4</span> References</h2>
+<section id="acoustic-survey-data" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="acoustic-survey-data"><span class="header-section-number">3.2</span> Acoustic survey data</h3>
+<p>Within each survey subsection, the first figure shows the all-years pooled acoustic-survey sex ratios across all samples, followed by the year-specific length-based view.</p>
+<section id="bering-sea-summer-acoustic-surveys" class="level4" data-number="3.2.1">
+<h4 data-number="3.2.1" class="anchored" data-anchor-id="bering-sea-summer-acoustic-surveys"><span class="header-section-number">3.2.1</span> Bering Sea summer acoustic surveys</h4>
+<section id="aggregated-over-years" class="level5" data-number="3.2.1.1">
+<h5 data-number="3.2.1.1" class="anchored" data-anchor-id="aggregated-over-years"><span class="header-section-number">3.2.1.1</span> Aggregated over years</h5>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="ot">&lt;-</span> df_acoust <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(AGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio_age_box</span>(<span class="at">min_n =</span> <span class="dv">25</span>, <span class="at">fmp_filter =</span> <span class="st">"BSAI"</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"BSAI Acoustic Survey: By Age (All Samples Pooled)"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>p_length_overall <span class="ot">&lt;-</span> <span class="fu">plot_sex_ratio_length_box</span>(df_acoust, <span class="at">bin_width =</span> <span class="dv">5</span>, <span class="at">min_n =</span> <span class="dv">25</span>, <span class="at">fmp_filter =</span> <span class="st">"BSAI"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"BSAI Acoustic Survey: By Length (All Samples Pooled)"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="sc">/</span> p_length_overall <span class="sc">+</span> patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-acoustic-sex-ratio-overall-bsai" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-acoustic-sex-ratio-overall-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-overall-bsai-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Figure&nbsp;14: BSAI pooled acoustic-survey sex ratios across all samples: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."><img src="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-overall-bsai-1.png" class="img-fluid figure-img" width="960"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acoustic-sex-ratio-overall-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14: BSAI pooled acoustic-survey sex ratios across all samples: by age with ages &gt;13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="by-year" class="level5" data-number="3.2.1.2">
+<h5 data-number="3.2.1.2" class="anchored" data-anchor-id="by-year"><span class="header-section-number">3.2.1.2</span> By year</h5>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_acoust <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LENGTH <span class="sc">&gt;=</span> <span class="dv">20</span>, LENGTH <span class="sc">&lt;=</span> <span class="dv">65</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">length_bin_mid =</span> <span class="fu">if_else</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">60</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">62.5</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>) <span class="sc">+</span> <span class="fl">2.5</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> length_bin_mid,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> YEAR,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_n =</span> <span class="dv">25</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">5</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"BSAI"</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-acoustic-sex-ratio-length-year-bsai" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-acoustic-sex-ratio-length-year-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-length-year-bsai-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="Figure&nbsp;15: Acoustic survey sex ratio (proportion female) by 5-cm length bins for BSAI, faceted by year (1993-2024; min_n = 25)."><img src="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-length-year-bsai-1.png" class="img-fluid figure-img" width="1152"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acoustic-sex-ratio-length-year-bsai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;15: Acoustic survey sex ratio (proportion female) by 5-cm length bins for BSAI, faceted by year (1993-2024; min_n = 25).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="goa-winter-acoustic-surveys" class="level4" data-number="3.2.2">
+<h4 data-number="3.2.2" class="anchored" data-anchor-id="goa-winter-acoustic-surveys"><span class="header-section-number">3.2.2</span> GOA winter acoustic surveys</h4>
+<section id="aggregated-over-years-1" class="level5" data-number="3.2.2.1">
+<h5 data-number="3.2.2.1" class="anchored" data-anchor-id="aggregated-over-years-1"><span class="header-section-number">3.2.2.1</span> Aggregated over years</h5>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="ot">&lt;-</span> df_acoust <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(AGE)) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio_age_box</span>(<span class="at">min_n =</span> <span class="dv">25</span>, <span class="at">fmp_filter =</span> <span class="st">"GOA"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GOA Acoustic Survey: By Age (All Samples Pooled)"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>p_length_overall <span class="ot">&lt;-</span> <span class="fu">plot_sex_ratio_length_box</span>(df_acoust, <span class="at">bin_width =</span> <span class="dv">5</span>, <span class="at">min_n =</span> <span class="dv">25</span>, <span class="at">fmp_filter =</span> <span class="st">"GOA"</span>) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"GOA Acoustic Survey: By Length (All Samples Pooled)"</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>p_age_overall <span class="sc">/</span> p_length_overall <span class="sc">+</span> patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-acoustic-sex-ratio-overall-goa" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-acoustic-sex-ratio-overall-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-overall-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="Figure&nbsp;16: GOA pooled acoustic-survey sex ratios across all samples: by age with ages >13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom)."><img src="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-overall-goa-1.png" class="img-fluid figure-img" width="960"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acoustic-sex-ratio-overall-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;16: GOA pooled acoustic-survey sex ratios across all samples: by age with ages &gt;13 pooled to 13+ (top) and by 5-cm length bins for lengths 20-65 cm (bottom).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="by-year-1" class="level5" data-number="3.2.2.2">
+<h5 data-number="3.2.2.2" class="anchored" data-anchor-id="by-year-1"><span class="header-section-number">3.2.2.2</span> By year</h5>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_acoust <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LENGTH <span class="sc">&gt;=</span> <span class="dv">20</span>, LENGTH <span class="sc">&lt;=</span> <span class="dv">65</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">length_bin_mid =</span> <span class="fu">if_else</span>(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">60</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="fl">62.5</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>) <span class="sc">+</span> <span class="fl">2.5</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_sex_ratio</span>(</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x_var =</span> length_bin_mid,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_var =</span> YEAR,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_n =</span> <span class="dv">25</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">show_labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">facet_ncol =</span> <span class="dv">5</span>,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp_filter =</span> <span class="st">"GOA"</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-acoustic-sex-ratio-length-year-goa" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-acoustic-sex-ratio-length-year-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-length-year-goa-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-17" title="Figure&nbsp;17: Acoustic survey sex ratio (proportion female) by 5-cm length bins for GOA, faceted by year (1993-2025; min_n = 25)."><img src="otoliths_report_files/figure-html/fig-acoustic-sex-ratio-length-year-goa-1.png" class="img-fluid figure-img" width="1152"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acoustic-sex-ratio-length-year-goa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;17: Acoustic survey sex ratio (proportion female) by 5-cm length bins for GOA, faceted by year (1993-2025; min_n = 25).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="methods" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="methods"><span class="header-section-number">4</span> Methods</h2>
+<p>To keep the Bayesian analysis tractable within a renderable Quarto workflow, the fitted models below use cell-aggregated data rather than all 1.4 million individual observations. The key design choice from the EDA is retained: <code>fmp</code> is treated as the primary split category, and separate models are fit for <code>GOA</code> and <code>BSAI</code>.</p>
+<p>For sex ratio, the aggregated response is female count out of total count within <code>YEAR x season x subarea x age x 5-cm length-bin</code> cells. Age 4 is used as the reference category so that the <code>seasonB</code> term is directly interpretable as the age-4 B-versus-A contrast after adjusting for length, year, and subarea. For growth, the aggregated response is mean length with its standard error within <code>YEAR x season x subarea x sex x age</code> cells, fit as a Gaussian measurement-error model. In both cases, the reduced formulation preserves the main contrasts of interest from the EDA: season, age, sex, year, subarea, and their comparison between <code>GOA</code> and <code>BSAI</code>.</p>
+<p>The implemented <code>brms</code> data preparation was:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>df_model <span class="ot">&lt;-</span> df_age <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(SEX), <span class="sc">!</span><span class="fu">is.na</span>(AGE), <span class="sc">!</span><span class="fu">is.na</span>(LENGTH), <span class="sc">!</span><span class="fu">is.na</span>(subarea))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>sex_model_data <span class="ot">&lt;-</span> df_model <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SEX <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>), LENGTH <span class="sc">&gt;=</span> <span class="dv">20</span>, LENGTH <span class="sc">&lt;=</span> <span class="dv">65</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">female =</span> <span class="fu">if_else</span>(SEX <span class="sc">==</span> <span class="st">"F"</span>, <span class="dv">1</span>L, <span class="dv">0</span>L),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(<span class="fu">pmin</span>(<span class="fu">as.integer</span>(AGE), <span class="dv">13</span>L)), <span class="at">ref =</span> <span class="st">"4"</span>),</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">length_bin =</span> <span class="fu">pmin</span>(<span class="fu">floor</span>((LENGTH <span class="sc">-</span> <span class="dv">20</span>) <span class="sc">/</span> <span class="dv">5</span>) <span class="sc">*</span> <span class="dv">5</span> <span class="sc">+</span> <span class="dv">20</span>, <span class="dv">60</span>),</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">length_mid =</span> <span class="fu">if_else</span>(length_bin <span class="sc">==</span> <span class="dv">60</span>, <span class="fl">62.5</span>, length_bin <span class="sc">+</span> <span class="fl">2.5</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fmp, YEAR, season, subarea, age_group, length_bin, length_mid) <span class="sc">%&gt;%</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">female =</span> <span class="fu">sum</span>(female), <span class="at">total_n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>growth_model_data <span class="ot">&lt;-</span> df_model <span class="sc">%&gt;%</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SEX <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"F"</span>, <span class="st">"M"</span>), AGE <span class="sc">&gt;=</span> <span class="dv">2</span>, AGE <span class="sc">&lt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(<span class="fu">as.integer</span>(AGE)), <span class="at">ref =</span> <span class="st">"4"</span>),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex =</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(SEX), <span class="at">ref =</span> <span class="st">"F"</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(fmp, YEAR, season, subarea, sex, age_group) <span class="sc">%&gt;%</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_length =</span> <span class="fu">mean</span>(LENGTH), <span class="at">sd_length =</span> <span class="fu">sd</span>(LENGTH), <span class="at">n =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">se_length =</span> sd_length <span class="sc">/</span> <span class="fu">sqrt</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.finite</span>(se_length), n <span class="sc">&gt;=</span> <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>The implemented <code>brms</code> model formulas were:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>sex_formula <span class="ot">&lt;-</span> <span class="fu">bf</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  female <span class="sc">|</span> <span class="fu">trials</span>(total_n) <span class="sc">~</span> season <span class="sc">*</span> age_group <span class="sc">+</span> length_sc <span class="sc">+</span> year_sc <span class="sc">+</span> subarea</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>fit_sex_goa <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  sex_formula,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">filter</span>(sex_model_data, fmp <span class="sc">==</span> <span class="st">"GOA"</span>),</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>fit_sex_bsai <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  sex_formula,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">filter</span>(sex_model_data, fmp <span class="sc">==</span> <span class="st">"BSAI"</span>),</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(),</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>growth_formula <span class="ot">&lt;-</span> <span class="fu">bf</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  mean_length <span class="sc">|</span> <span class="fu">se</span>(se_length, <span class="at">sigma =</span> <span class="cn">TRUE</span>) <span class="sc">~</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    sex <span class="sc">+</span> season <span class="sc">*</span> age_group <span class="sc">+</span> sex<span class="sc">:</span>age_group <span class="sc">+</span> year_sc <span class="sc">+</span> subarea</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>fit_growth_goa <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  growth_formula,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">filter</span>(growth_model_data, fmp <span class="sc">==</span> <span class="st">"GOA"</span>),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>fit_growth_bsai <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  growth_formula,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">filter</span>(growth_model_data, fmp <span class="sc">==</span> <span class="st">"BSAI"</span>),</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">gaussian</span>(),</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">backend =</span> <span class="st">"cmdstanr"</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="results" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="results"><span class="header-section-number">5</span> Results</h2>
+<p>The reduced Bayesian fits support treating <code>GOA</code> and <code>BSAI</code> separately rather than pooling them into a single common model. Table <a href="#tbl-model-data" class="quarto-xref">Table&nbsp;1</a> shows the aggregated datasets actually used in the fitted <code>brms</code> analyses.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>model_data_summary <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_label</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">outcome =</span> <span class="st">"Outcome"</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp =</span> <span class="st">"FMP"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cells =</span> <span class="st">"Aggregated Cells"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_n =</span> <span class="st">"Fish Used"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subareas =</span> <span class="st">"Subareas"</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-model-data" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-model-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Aggregated datasets used in the brms model fits.
+</figcaption>
+<div aria-describedby="tbl-model-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="azmuxgrvns" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#azmuxgrvns table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#azmuxgrvns thead, #azmuxgrvns tbody, #azmuxgrvns tfoot, #azmuxgrvns tr, #azmuxgrvns td, #azmuxgrvns th {
+  border-style: none;
+}
+
+#azmuxgrvns p {
+  margin: 0;
+  padding: 0;
+}
+
+#azmuxgrvns .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#azmuxgrvns .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#azmuxgrvns .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#azmuxgrvns .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#azmuxgrvns .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#azmuxgrvns .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#azmuxgrvns .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#azmuxgrvns .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#azmuxgrvns .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#azmuxgrvns .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#azmuxgrvns .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#azmuxgrvns .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#azmuxgrvns .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#azmuxgrvns .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#azmuxgrvns .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#azmuxgrvns .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#azmuxgrvns .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#azmuxgrvns .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#azmuxgrvns .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#azmuxgrvns .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#azmuxgrvns .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#azmuxgrvns .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#azmuxgrvns .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#azmuxgrvns .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#azmuxgrvns .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#azmuxgrvns .gt_left {
+  text-align: left;
+}
+
+#azmuxgrvns .gt_center {
+  text-align: center;
+}
+
+#azmuxgrvns .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#azmuxgrvns .gt_font_normal {
+  font-weight: normal;
+}
+
+#azmuxgrvns .gt_font_bold {
+  font-weight: bold;
+}
+
+#azmuxgrvns .gt_font_italic {
+  font-style: italic;
+}
+
+#azmuxgrvns .gt_super {
+  font-size: 65%;
+}
+
+#azmuxgrvns .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#azmuxgrvns .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#azmuxgrvns .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#azmuxgrvns .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#azmuxgrvns .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#azmuxgrvns .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#azmuxgrvns .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#azmuxgrvns .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#azmuxgrvns div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="outcome" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Outcome</th>
+<th id="fmp" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">FMP</th>
+<th id="cells" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Aggregated Cells</th>
+<th id="source_n" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Fish Used</th>
+<th id="subareas" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Subareas</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="outcome">Sex ratio</td>
+<td class="gt_row gt_left" headers="fmp">GOA</td>
+<td class="gt_row gt_right" headers="cells">4456</td>
+<td class="gt_row gt_right" headers="source_n">64559</td>
+<td class="gt_row gt_left" headers="subareas">CGOA, WGOA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="outcome">Sex ratio</td>
+<td class="gt_row gt_left" headers="fmp">BSAI</td>
+<td class="gt_row gt_right" headers="cells">5070</td>
+<td class="gt_row gt_right" headers="source_n">99116</td>
+<td class="gt_row gt_left" headers="subareas">AI, NW_BS, SE_BS</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="outcome">Growth</td>
+<td class="gt_row gt_left" headers="fmp">GOA</td>
+<td class="gt_row gt_right" headers="cells">1610</td>
+<td class="gt_row gt_right" headers="source_n">61678</td>
+<td class="gt_row gt_left" headers="subareas">CGOA, WGOA</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="outcome">Growth</td>
+<td class="gt_row gt_left" headers="fmp">BSAI</td>
+<td class="gt_row gt_right" headers="cells">1824</td>
+<td class="gt_row gt_right" headers="source_n">93725</td>
+<td class="gt_row gt_left" headers="subareas">AI, NW_BS, SE_BS</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>For sex ratio, the age-4 season contrast differs materially between <code>GOA</code> and <code>BSAI</code>. The posterior median B-versus-A change in female probability at age 4 was 5.4% in <code>GOA</code> (3.8% to 6.9%), but -0.9% in <code>BSAI</code> (-2.4% to 1.4%). That implies a clear positive seasonal shift in <code>GOA</code> sex ratio at age 4, whereas the comparable BSAI contrast overlaps zero.</p>
+<p>For growth, the fitted models do not support the raw visual impression that age-4 fish are larger in Season A. After adjustment for age, sex, year, and subarea, the posterior median B-versus-A change in age-4 mean length was 3.34 cm in <code>GOA</code> (2.49 to 4.20 cm) and 2.67 cm in <code>BSAI</code> (2.17 to 3.13 cm). In both <code>fmp</code> groupings, the posterior age-4 seasonal effect is positive for Season B, which reverses the simple visual interpretation from the unadjusted EDA plots.</p>
+<p>The fitted growth models also indicate that males are shorter than females at age 4 in both areas: -0.99 cm in <code>GOA</code> (-1.91 to -0.25 cm) and -0.52 cm in <code>BSAI</code> (-0.98 to -0.03 cm).</p>
+<p>Table <a href="#tbl-key-contrasts" class="quarto-xref">Table&nbsp;2</a> summarizes the key posterior contrasts on interpretable scales, while Table <a href="#tbl-selected-coefs" class="quarto-xref">Table&nbsp;3</a> reports selected coefficient summaries from the separate <code>GOA</code> and <code>BSAI</code> fits. The sex-ratio coefficient table shows a positive season effect and stronger negative year trend in <code>GOA</code>, while both sex-ratio models estimate a positive length effect. The growth coefficient table shows positive Season B effects and negative male effects in both <code>fmp</code> groupings.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>contrast_summary <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(contrast, fmp, estimate_display, cri_display) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_label</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">contrast =</span> <span class="st">"Contrast"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp =</span> <span class="st">"FMP"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate_display =</span> <span class="st">"Posterior Median"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cri_display =</span> <span class="st">"95% CrI"</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-key-contrasts" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-key-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Key posterior contrasts from the separate GOA and BSAI brms fits.
+</figcaption>
+<div aria-describedby="tbl-key-contrasts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="qclksgxdbe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qclksgxdbe table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qclksgxdbe thead, #qclksgxdbe tbody, #qclksgxdbe tfoot, #qclksgxdbe tr, #qclksgxdbe td, #qclksgxdbe th {
+  border-style: none;
+}
+
+#qclksgxdbe p {
+  margin: 0;
+  padding: 0;
+}
+
+#qclksgxdbe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qclksgxdbe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qclksgxdbe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qclksgxdbe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qclksgxdbe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qclksgxdbe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qclksgxdbe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qclksgxdbe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qclksgxdbe .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qclksgxdbe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qclksgxdbe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qclksgxdbe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qclksgxdbe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qclksgxdbe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qclksgxdbe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qclksgxdbe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qclksgxdbe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qclksgxdbe .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qclksgxdbe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qclksgxdbe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qclksgxdbe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qclksgxdbe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qclksgxdbe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qclksgxdbe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qclksgxdbe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qclksgxdbe .gt_left {
+  text-align: left;
+}
+
+#qclksgxdbe .gt_center {
+  text-align: center;
+}
+
+#qclksgxdbe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qclksgxdbe .gt_font_normal {
+  font-weight: normal;
+}
+
+#qclksgxdbe .gt_font_bold {
+  font-weight: bold;
+}
+
+#qclksgxdbe .gt_font_italic {
+  font-style: italic;
+}
+
+#qclksgxdbe .gt_super {
+  font-size: 65%;
+}
+
+#qclksgxdbe .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qclksgxdbe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qclksgxdbe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qclksgxdbe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qclksgxdbe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qclksgxdbe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qclksgxdbe .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qclksgxdbe .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qclksgxdbe div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="contrast" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Contrast</th>
+<th id="fmp" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">FMP</th>
+<th id="estimate_display" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Posterior Median</th>
+<th id="cri_display" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">95% CrI</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="contrast">Age-4 female probability: Season B - A</td>
+<td class="gt_row gt_left" headers="fmp">GOA</td>
+<td class="gt_row gt_left" headers="estimate_display">5.4%</td>
+<td class="gt_row gt_left" headers="cri_display">3.8% to 6.9%</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="contrast">Age-4 female probability: Season B - A</td>
+<td class="gt_row gt_left" headers="fmp">BSAI</td>
+<td class="gt_row gt_left" headers="estimate_display">-0.9%</td>
+<td class="gt_row gt_left" headers="cri_display">-2.4% to 1.4%</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="contrast">Age-4 mean length: Season B - A</td>
+<td class="gt_row gt_left" headers="fmp">GOA</td>
+<td class="gt_row gt_left" headers="estimate_display">3.34 cm</td>
+<td class="gt_row gt_left" headers="cri_display">2.49 to 4.20 cm</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="contrast">Age-4 mean length: Season B - A</td>
+<td class="gt_row gt_left" headers="fmp">BSAI</td>
+<td class="gt_row gt_left" headers="estimate_display">2.67 cm</td>
+<td class="gt_row gt_left" headers="cri_display">2.17 to 3.13 cm</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="contrast">Age-4 mean length: Male - Female</td>
+<td class="gt_row gt_left" headers="fmp">GOA</td>
+<td class="gt_row gt_left" headers="estimate_display">-0.99 cm</td>
+<td class="gt_row gt_left" headers="cri_display">-1.91 to -0.25 cm</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="contrast">Age-4 mean length: Male - Female</td>
+<td class="gt_row gt_left" headers="fmp">BSAI</td>
+<td class="gt_row gt_left" headers="estimate_display">-0.52 cm</td>
+<td class="gt_row gt_left" headers="cri_display">-0.98 to -0.03 cm</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>coefficient_summary <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(outcome, fmp, label, estimate_display, cri_display) <span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"outcome"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">cols_label</span>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fmp =</span> <span class="st">"FMP"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> <span class="st">"Parameter"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate_display =</span> <span class="st">"Posterior Median"</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cri_display =</span> <span class="st">"95% CrI"</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-selected-coefs" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-selected-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Selected coefficient summaries from the separate GOA and BSAI brms fits.
+</figcaption>
+<div aria-describedby="tbl-selected-coefs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div id="hkvwcngvxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hkvwcngvxq table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hkvwcngvxq thead, #hkvwcngvxq tbody, #hkvwcngvxq tfoot, #hkvwcngvxq tr, #hkvwcngvxq td, #hkvwcngvxq th {
+  border-style: none;
+}
+
+#hkvwcngvxq p {
+  margin: 0;
+  padding: 0;
+}
+
+#hkvwcngvxq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hkvwcngvxq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hkvwcngvxq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hkvwcngvxq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hkvwcngvxq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hkvwcngvxq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hkvwcngvxq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hkvwcngvxq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hkvwcngvxq .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hkvwcngvxq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hkvwcngvxq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hkvwcngvxq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hkvwcngvxq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hkvwcngvxq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hkvwcngvxq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hkvwcngvxq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hkvwcngvxq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hkvwcngvxq .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hkvwcngvxq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hkvwcngvxq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hkvwcngvxq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hkvwcngvxq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hkvwcngvxq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hkvwcngvxq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hkvwcngvxq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hkvwcngvxq .gt_left {
+  text-align: left;
+}
+
+#hkvwcngvxq .gt_center {
+  text-align: center;
+}
+
+#hkvwcngvxq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hkvwcngvxq .gt_font_normal {
+  font-weight: normal;
+}
+
+#hkvwcngvxq .gt_font_bold {
+  font-weight: bold;
+}
+
+#hkvwcngvxq .gt_font_italic {
+  font-style: italic;
+}
+
+#hkvwcngvxq .gt_super {
+  font-size: 65%;
+}
+
+#hkvwcngvxq .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hkvwcngvxq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hkvwcngvxq .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hkvwcngvxq .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hkvwcngvxq .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hkvwcngvxq .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hkvwcngvxq .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hkvwcngvxq .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hkvwcngvxq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="fmp" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">FMP</th>
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Parameter</th>
+<th id="estimate_display" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Posterior Median</th>
+<th id="cri_display" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">95% CrI</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="gt_group_heading_row odd">
+<th colspan="4" id="Sex ratio" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Sex ratio</th>
+</tr>
+<tr class="gt_row_group_first even">
+<td class="gt_row gt_left" headers="Sex ratio  fmp">GOA</td>
+<td class="gt_row gt_left" headers="Sex ratio  label">Season B effect at age 4</td>
+<td class="gt_row gt_right" headers="Sex ratio  estimate_display">0.231</td>
+<td class="gt_row gt_left" headers="Sex ratio  cri_display">0.163 to 0.297</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sex ratio  fmp">GOA</td>
+<td class="gt_row gt_left" headers="Sex ratio  label">Length effect (scaled)</td>
+<td class="gt_row gt_right" headers="Sex ratio  estimate_display">0.701</td>
+<td class="gt_row gt_left" headers="Sex ratio  cri_display">0.672 to 0.732</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sex ratio  fmp">GOA</td>
+<td class="gt_row gt_left" headers="Sex ratio  label">Year effect (scaled)</td>
+<td class="gt_row gt_right" headers="Sex ratio  estimate_display">-0.101</td>
+<td class="gt_row gt_left" headers="Sex ratio  cri_display">-0.117 to -0.086</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sex ratio  fmp">BSAI</td>
+<td class="gt_row gt_left" headers="Sex ratio  label">Season B effect at age 4</td>
+<td class="gt_row gt_right" headers="Sex ratio  estimate_display">-0.033</td>
+<td class="gt_row gt_left" headers="Sex ratio  cri_display">-0.106 to 0.060</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Sex ratio  fmp">BSAI</td>
+<td class="gt_row gt_left" headers="Sex ratio  label">Length effect (scaled)</td>
+<td class="gt_row gt_right" headers="Sex ratio  estimate_display">0.916</td>
+<td class="gt_row gt_left" headers="Sex ratio  cri_display">0.881 to 0.950</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Sex ratio  fmp">BSAI</td>
+<td class="gt_row gt_left" headers="Sex ratio  label">Year effect (scaled)</td>
+<td class="gt_row gt_right" headers="Sex ratio  estimate_display">-0.021</td>
+<td class="gt_row gt_left" headers="Sex ratio  cri_display">-0.034 to -0.006</td>
+</tr>
+<tr class="gt_group_heading_row even">
+<th colspan="4" id="Growth" class="gt_group_heading" data-quarto-table-cell-role="th" scope="colgroup">Growth</th>
+</tr>
+<tr class="gt_row_group_first odd">
+<td class="gt_row gt_left" headers="Growth  fmp">GOA</td>
+<td class="gt_row gt_left" headers="Growth  label">Male effect at age 4</td>
+<td class="gt_row gt_right" headers="Growth  estimate_display">-1.009</td>
+<td class="gt_row gt_left" headers="Growth  cri_display">-1.912 to -0.246</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Growth  fmp">GOA</td>
+<td class="gt_row gt_left" headers="Growth  label">Season B effect at age 4</td>
+<td class="gt_row gt_right" headers="Growth  estimate_display">3.353</td>
+<td class="gt_row gt_left" headers="Growth  cri_display">2.489 to 4.200</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Growth  fmp">GOA</td>
+<td class="gt_row gt_left" headers="Growth  label">Year effect (scaled)</td>
+<td class="gt_row gt_right" headers="Growth  estimate_display">0.425</td>
+<td class="gt_row gt_left" headers="Growth  cri_display">0.265 to 0.587</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Growth  fmp">BSAI</td>
+<td class="gt_row gt_left" headers="Growth  label">Male effect at age 4</td>
+<td class="gt_row gt_right" headers="Growth  estimate_display">-0.522</td>
+<td class="gt_row gt_left" headers="Growth  cri_display">-0.984 to -0.032</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="Growth  fmp">BSAI</td>
+<td class="gt_row gt_left" headers="Growth  label">Season B effect at age 4</td>
+<td class="gt_row gt_right" headers="Growth  estimate_display">2.664</td>
+<td class="gt_row gt_left" headers="Growth  cri_display">2.168 to 3.132</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Growth  fmp">BSAI</td>
+<td class="gt_row gt_left" headers="Growth  label">Year effect (scaled)</td>
+<td class="gt_row gt_right" headers="Growth  estimate_display">0.258</td>
+<td class="gt_row gt_left" headers="Growth  cri_display">0.170 to 0.351</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The posterior marginal distributions in <a href="#fig-key-posterior-densities" class="quarto-xref">Figure&nbsp;18</a> make the <code>fmp</code> differences more explicit. The season effect on sex ratio is clearly shifted positive in <code>GOA</code> and centered near zero in <code>BSAI</code>, whereas the growth contrasts are more similar between the two <code>fmp</code> groupings and remain positive for Season B in both cases.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(contrast_draws, <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">color =</span> fmp, <span class="at">fill =</span> fmp)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>contrast, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Posterior Draw"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span>,</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"FMP"</span>,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"FMP"</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">11</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-key-posterior-densities" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-key-posterior-densities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="otoliths_report_files/figure-html/fig-key-posterior-densities-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-18" title="Figure&nbsp;18: Posterior marginal distributions for key age-4 contrasts from separate GOA and BSAI brms models."><img src="otoliths_report_files/figure-html/fig-key-posterior-densities-1.png" class="img-fluid figure-img" width="1056"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-key-posterior-densities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;18: Posterior marginal distributions for key age-4 contrasts from separate GOA and BSAI brms models.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="references"><span class="header-section-number">6</span> References</h2>
 <ul>
 <li>Source script: <code>otoliths.R</code> (BSAI pollock fisheries otolith selector; created 2021-03-02).</li>
 <li>Input data used here: <code>age1986-2025.csv</code>.</li>
