@@ -85,6 +85,18 @@ filter_plot_data <- function(data, season_filter = NULL, fmp_filter = NULL) {
   data
 }
 
+summarize_sex_ratio <- function(data, group_vars) {
+  data %>%
+    group_by(!!!group_vars) %>%
+    summarize(
+      female_n = sum(SEX == "F"),
+      male_n = sum(SEX == "M"),
+      total_n = female_n + male_n,
+      sex_ratio = female_n / total_n,
+      .groups = "drop"
+    )
+}
+
 build_facet_vars <- function(primary_facet = NULL, facet_season = FALSE, facet_fmp = FALSE) {
   facet_vars <- list()
 
@@ -116,13 +128,7 @@ plot_sex_ratio <- function(data, x_var, facet_var = NULL, min_n = 5,
 
   plot_df <- data %>%
     filter_plot_data(season_filter = season_filter, fmp_filter = fmp_filter) %>%
-    mutate(is_female = if_else(SEX == "F", 1, 0)) %>%
-    group_by(!!!group_vars) %>%
-    summarize(
-      total_n = n(),
-      sex_ratio = mean(is_female),
-      .groups = "drop"
-    ) %>%
+    summarize_sex_ratio(group_vars) %>%
     filter(total_n >= min_n)
 
   plot_mapping <- aes(x = !!x_var, y = sex_ratio)
@@ -186,15 +192,9 @@ plot_sex_ratio_age_box <- function(data, min_n = 25, y_limits = c(0.3, 0.7),
   plot_df <- data %>%
     filter_plot_data(season_filter = season_filter, fmp_filter = fmp_filter) %>%
     mutate(
-      is_female = if_else(SEX == "F", 1, 0),
       age_group = if_else(AGE > 13, "13+", as.character(AGE))
     ) %>%
-    group_by(!!!group_vars) %>%
-    summarize(
-      total_n = n(),
-      sex_ratio = mean(is_female),
-      .groups = "drop"
-    ) %>%
+    summarize_sex_ratio(group_vars) %>%
     filter(total_n >= min_n)
 
   numeric_ages <- suppressWarnings(as.integer(plot_df$age_group[plot_df$age_group != "13+"]))
@@ -242,15 +242,9 @@ plot_sex_ratio_length_box <- function(data, bin_width = 5, min_n = 50,
     filter_plot_data(season_filter = season_filter, fmp_filter = fmp_filter) %>%
     filter(LENGTH >= 20, LENGTH <= 65) %>%
     mutate(
-      is_female = if_else(SEX == "F", 1, 0),
       length_bin_lower = pmin(floor((LENGTH - 20) / bin_width) * bin_width + 20, 60)
     ) %>%
-    group_by(!!!group_vars) %>%
-    summarize(
-      total_n = n(),
-      sex_ratio = mean(is_female),
-      .groups = "drop"
-    ) %>%
+    summarize_sex_ratio(group_vars) %>%
     filter(total_n >= min_n) %>%
     mutate(
       length_bin_mid = if_else(length_bin_lower == 60, 62.5, length_bin_lower + bin_width / 2),
@@ -614,7 +608,7 @@ names(df_acoust_big)
 #unique(df_acoust_big$region)
 df_acoust <- df_acoust_big |>
   mutate(
-    SEX = if_else(sex == 1, "F", if_else(sex==2,"M","U")),
+    SEX = if_else(sex == 1, "M", if_else(sex==2,"F","U")),
     fmp = if_else(region == "GOA", "GOA", "BSAI"),
     YEAR = collection_year,
     LENGTH = length/10,
@@ -725,7 +719,7 @@ df_acoust %>%
 
 To keep the Bayesian analysis tractable within a renderable Quarto workflow, the fitted models below use cell-aggregated data rather than all 1.4 million individual observations. The key design choice from the EDA is retained: `fmp` is treated as the primary split category, and separate models are fit for `GOA` and `BSAI`.
 
-For sex ratio, the aggregated response is female count out of total count within `YEAR x season x subarea x age x 5-cm length-bin` cells. Age 4 is used as the reference category so that the `seasonB` term is directly interpretable as the age-4 B-versus-A contrast after adjusting for length, year, and subarea. For growth, the aggregated response is mean length with its standard error within `YEAR x season x subarea x sex x age` cells, fit as a Gaussian measurement-error model. In both cases, the reduced formulation preserves the main contrasts of interest from the EDA: season, age, sex, year, subarea, and their comparison between `GOA` and `BSAI`.
+For sex ratio, the aggregated response is female count out of total `F + M` count within `YEAR x season x subarea x age x 5-cm length-bin` cells, excluding records coded `U`. Age 4 is used as the reference category so that the `seasonB` term is directly interpretable as the age-4 B-versus-A contrast after adjusting for length, year, and subarea. For growth, the aggregated response is mean length with its standard error within `YEAR x season x subarea x sex x age` cells, fit as a Gaussian measurement-error model. In both cases, the reduced formulation preserves the main contrasts of interest from the EDA: season, age, sex, year, subarea, and their comparison between `GOA` and `BSAI`.
 
 The implemented `brms` data preparation was:
 
