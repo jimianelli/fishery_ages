@@ -46,7 +46,7 @@ plot_sex_ratio <- function(data, x_var, facet_var, min_n = 5, y_limits = c(0.3, 
 
 # --- Examples ---
 
-df_age<-read.csv("age1986-2025.csv")
+df_age<-read.csv("df_age.csv")
 # To see the text labels (n/100):
 df_age %>% plot_sex_ratio(AGE, YEAR, show_labels = TRUE)
 

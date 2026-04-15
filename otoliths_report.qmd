@@ -46,23 +46,14 @@ library(scales)
 #| label: load-df-age
 #| include: false
 #| cache: true
-#| cache.extra: !expr file.info("age1986-2025.csv")$mtime
+#| cache.extra: !expr file.info("df_age.csv")$mtime
 
-df_age_big <- read_csv("age1986-2025.csv", show_col_types = FALSE)
-df_age <- df_age_big |>
+df_age <- read_csv("df_age.csv", show_col_types = FALSE) |>
   mutate(
-    subarea = case_when(
-      NMFS_AREA == 610 ~ "WGOA",
-      NMFS_AREA < 520 ~ "SE_BS",
-      dplyr::between(NMFS_AREA, 520, 539) ~ "NW_BS",
-      dplyr::between(NMFS_AREA, 620, 630) ~ "CGOA",
-      dplyr::between(NMFS_AREA, 540, 549) ~ "AI",
-      TRUE ~ NA_character_
-    ),
-    season = if_else(month(HAUL_OFFLOAD_DATE) < 6, "A", "B"),
-    fmp = if_else(NMFS_AREA < 600, "BSAI", "GOA")
-  ) |>
-  select(YEAR, season, fmp, subarea, SEX, AGE, LENGTH)
+    season = factor(season, levels = c("A", "B")),
+    fmp = factor(fmp, levels = c("BSAI", "GOA")),
+    subarea = factor(subarea, levels = c("SE_BS", "NW_BS", "AI", "WGOA", "CGOA"))
+  )
 
 ```
 
@@ -813,7 +804,7 @@ fit_growth_bsai <- brm(
 #| label: fit-brms-models
 #| include: false
 #| cache: true
-#| cache.extra: !expr paste(file.info("age1986-2025.csv")$mtime, as.character(packageVersion("brms")), as.character(packageVersion("cmdstanr")))
+#| cache.extra: !expr paste(file.info("df_age.csv")$mtime, as.character(packageVersion("brms")), as.character(packageVersion("cmdstanr")))
 library(brms)
 library(gt)
 
@@ -1122,6 +1113,6 @@ ggplot(contrast_draws, aes(x = value, color = fmp, fill = fmp)) +
 ## References
 
 - Source script: `otoliths.R` (BSAI pollock fisheries otolith selector; created 2021-03-02).
-- Input data used here: `age1986-2025.csv`.
+- Input data used here: `df_age.csv` (derived analysis dataset with public-safe columns only).
 - Query workflow used to generate age data is documented in `GetAgesSql.R`.
 - Ianelli, J., T. Honkalehto, S. Wassermann, A. McCarthy, S. Steinessen, C. McGilliard, and E. Siddon. 2024. *Assessment of walleye pollock in the eastern Bering Sea*. North Pacific Fishery Management Council, Anchorage, AK.
